@@ -1,0 +1,40 @@
+.footer {
+  background-color: rgb(18, 18, 18);
+  padding: 0.5em 0;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.footerContainer {
+  border-bottom: 2px solid rgb(155, 50, 203);
+  margin-bottom: 1em;
+}
+
+.addressContainer {
+  font-style: normal;
+  color: rgb(217, 220, 206);
+}
+
+.slogan {
+  font-style: italic;
+  color: rgb(217, 220, 206);
+}
+
+.logo {
+  margin: auto 0.5em;
+}
+
+.smallerLogo {
+  width: 40px;
+  height: 40px;
+}
+
+.biggerLogo {
+  width: 100px;
+  height: 60px;
+}

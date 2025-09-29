@@ -1,0 +1,30 @@
+.navList {
+  display: flex;
+  margin: 0;
+}
+
+.navItem {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: rgb(217, 220, 206);
+  padding: 1em 1.3em 0.8em;
+  border-bottom: 5px solid transparent;
+  transition: 0.4s ease-in-out;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.navItem:focus-visible,
+.navItem:hover {
+  background-color: rgb(62, 62, 62);
+}
+
+.active {
+  border-color: rgb(155, 50, 203);
+  background-color: rgb(44, 44, 44);
+}
+
+.navItem.active:focus-visible {
+  background-color: rgb(44, 44, 44);
+}
