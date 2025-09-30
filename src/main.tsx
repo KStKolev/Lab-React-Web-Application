@@ -2,10 +2,15 @@ import "./styles/main.scss";
 // watch: native intellisense and file-peek for aliases from jsconfig.json and with none-js files doesn't work: https://github.com/microsoft/TypeScript/issues/29334
 
 import { Component, ErrorInfo /* , StrictMode */ } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom/client";
-import TheHeader from "./components/theHeader";
-import Login from "./components/account/login";
 import apiEndpoints from "./api.endpoints";
+import Header from "./components/header/header";
+import Home from "./components/home/home";
+import Products from "./components/products/products";
+import About from "./components/about/about";
+import Footer from "./components/footer/footer";
+import { ROUTES } from "./routes";
 
 interface Props {}
 interface State {}
@@ -38,12 +43,17 @@ class AppContainer extends Component<Props, State> {
 
   render() {
     return (
-      // <StrictMode>
-      <>
-        <TheHeader />
-        <Login />
-      </>
-      // </StrictMode>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.PRODUCTS} element={<Products />} />
+          <Route path={ROUTES.ABOUT} element={<About />} />
+
+          <Route path={ROUTES.CATCH} element={<Navigate to={ROUTES.HOME} replace />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     );
   }
 }

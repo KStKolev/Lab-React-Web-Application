@@ -83,6 +83,7 @@
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.3",
     "web-ui-pack": "^1.2.4"
   },
   "optionalDependencies": {
