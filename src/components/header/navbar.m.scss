@@ -28,3 +28,42 @@
 .navItem.active:focus-visible {
   background-color: rgb(44, 44, 44);
 }
+
+.dropdownWrapper {
+  position: relative;
+  z-index: 1000;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-bottom: 5px solid transparent;
+  background-color: rgb(18, 18, 18);
+}
+
+.arrowDropdown {
+  width: 20px;
+  transform: rotate(180deg);
+  transition: transform 0.4s ease-in-out;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+
+.open {
+  transform: rotate(360deg);
+}
+
+.dropdownContent {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  background-color: rgb(18, 18, 18);
+}
+
+.dropdownItem {
+  text-align: center;
+  padding: 1em;
+}
