@@ -1,0 +1,21 @@
+.categoriesSection {
+  width: 95%;
+  justify-self: center;
+  padding: 2em;
+  border-radius: 3rem;
+  background-color: rgba(13, 15, 19, 0.636);
+}
+
+.categoryTitle {
+  font-size: 1.4rem;
+  color: rgb(192, 191, 191);
+  margin: 0em 0.6em;
+}
+
+.categoriesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: space-evenly;
+  margin: 3em 0em 1.5em;
+}

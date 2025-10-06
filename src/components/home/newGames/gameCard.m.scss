@@ -1,0 +1,84 @@
+.flipCard {
+  width: 250px;
+  height: 400px;
+  perspective: 1000px;
+}
+
+.flipCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: rgb(214, 214, 214);
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;
+  transition: 0.6s transform;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 25px 3px rgba(130, 58, 169, 0.6);
+}
+
+.flipCardFront,
+.flipCardBack {
+  position: absolute;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.flipCardFront {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flipCardBack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 1rem;
+  transform: rotateY(180deg);
+}
+
+.addToCartButton {
+  font-size: 1.1rem;
+  color: white;
+  background-color: rgb(75, 30, 96);
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.gameDescription {
+  text-align: left;
+}
+
+.gameAge {
+  margin: 1em 0 1.7em;
+}
+
+.flipCard:hover > .flipCardInner,
+.flipCardBack {
+  transform: rotateY(180deg);
+}
+
+.gameImage {
+  display: block;
+  height: 300px;
+  object-fit: cover;
+}
+
+.spacer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gameTitle,
+.gamePrice {
+  font-size: 1rem;
+  margin: 0.7em;
+}
