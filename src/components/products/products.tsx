@@ -1,7 +1,13 @@
+import { useParams } from "react-router-dom";
+import * as style from "./products.m.scss";
+
 export default function Products() {
+  const params = useParams<{ category: string }>();
+  const { category } = params;
   return (
-    <div>
+    <section className={style.productsSection}>
       <h1>Products Page</h1>
-    </div>
+      <p>{category}</p>
+    </section>
   );
 }
