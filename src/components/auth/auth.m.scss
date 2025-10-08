@@ -1,0 +1,28 @@
+.signForm {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
+
+.signButton {
+  width: 50%;
+  font-size: 1.4em;
+  color: white;
+  background-color: rgb(86, 35, 112);
+  margin: 1em auto;
+  padding: 1em;
+  border: none;
+  border-radius: 0.8rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(104, 45, 137);
+  }
+}
+
+.errorText {
+  color: red;
+  font-size: 0.875rem;
+  text-align: end;
+}
