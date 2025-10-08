@@ -69,15 +69,48 @@ const gameNames = [
   "Dota 2",
 ];
 
+const mockUsers = [
+  { username: "test", password: "123456" },
+  { username: "user", password: "green" },
+];
+
 export default webpackMockServer.add((app) => {
   app.get(apiEndpoints.testMock, (_req, res) => res.json(mockData));
+
   app.get(apiEndpoints.topGames, (_req, res) => {
     const sortedGames = [...topGamesMockData].sort((a, b) => new Date(b.productAddDate).getTime() - new Date(a.productAddDate).getTime());
     res.json(sortedGames);
   });
+
   app.get(`${apiEndpoints.searchGames}/:text`, (req, res) => {
     const query = req.params.text?.toString().toLowerCase() || "";
     const results = gameNames.filter((name) => name.toLowerCase().includes(query));
     res.json(results);
+  });
+
+  app.post(apiEndpoints.signIn, (_req, res) => {
+    const { username, password } = _req.body;
+
+    const userExists = mockUsers.find((u) => u.username === username && u.password === password);
+
+    if (!userExists) {
+      return res.status(401).json({ code: 401, error: "Invalid username or password" });
+    }
+
+    return res.status(200).json({ code: 200 });
+  });
+
+  app.put(apiEndpoints.signUp, (_req, res) => {
+    const { username, password } = _req.body;
+
+    const userExists = mockUsers.some((user) => user.username === username);
+
+    if (userExists) {
+      return res.status(400).json({ code: 400, error: "Username already exists" });
+    }
+
+    mockUsers.push({ username, password });
+
+    return res.status(201).json({ code: 201 });
   });
 });
