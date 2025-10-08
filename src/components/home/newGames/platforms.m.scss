@@ -1,0 +1,17 @@
+.platformsList {
+  display: flex;
+  gap: 0.6em;
+  list-style: none;
+  background-color: rgba(0, 0, 0, 0.501);
+  padding-left: 0.2em;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.platformIcon {
+  width: 20px;
+  height: 20px;
+  filter: invert(48%) sepia(6%) saturate(96%) hue-rotate(251deg) brightness(180%) contrast(88%);
+}

@@ -1,6 +1,9 @@
 export const ROUTES = {
   HOME: "/",
-  PRODUCTS: "/products",
+  PRODUCTS: "/products/:category",
+  PC: "/products/pc",
+  PS: "/products/ps",
+  XBOX: "/products/xbox",
   ABOUT: "/about",
   CATCH: "*",
 } as const;

@@ -1,0 +1,25 @@
+.categoryContainer {
+  text-align: center;
+  border: 2px solid rgb(133, 133, 133);
+  border-bottom: 7px solid rgb(234, 233, 233);
+  background-color: rgb(0, 0, 0);
+  border-radius: 1rem;
+  padding: 2em 8em;
+  transition: 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.categoryContainer:hover {
+  border-color: rgb(134, 44, 182);
+}
+
+.categoryName {
+  color: rgb(114, 112, 115);
+}
+
+.categoryIcon {
+  width: 80px;
+  height: 80px;
+  margin-top: 1em;
+  filter: invert(48%) sepia(6%) saturate(96%) hue-rotate(251deg) brightness(90%) contrast(88%);
+}
