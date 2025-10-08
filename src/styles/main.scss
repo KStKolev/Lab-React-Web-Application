@@ -24,3 +24,8 @@ h2 {
   /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
   height: fit-content; /* test for autoprefixer in postcss */
 }
+
+input[type="password"]::-ms-reveal {
+  filter: brightness(0) invert(1);
+  margin-left: 1em;
+}

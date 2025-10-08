@@ -8,8 +8,12 @@ import apiEndpoints from "./api.endpoints";
 import Header from "./components/header/header";
 import Home from "./components/home/home";
 import Products from "./components/products/products";
+import Profile from "./components/profile/profile";
+import Cart from "./components/cart/Cart";
 import About from "./components/about/about";
 import Footer from "./components/footer/footer";
+import { AuthProvider } from "./customHooks/authContext";
+import ProtectedRoute from "./components/header/protectedRoute";
 import ErrorBoundary from "./components/errorHandler/errorBoundary";
 import ErrorPage from "./components/errorHandler/errorPage";
 import { ROUTES } from "./routes";
@@ -44,16 +48,52 @@ class AppContainer extends Component<Props, State> {
   render() {
     return (
       <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path={ROUTES.HOME} element={<Home />} errorElement={<ErrorRoutingPage />} />
-          <Route path={ROUTES.PRODUCTS} element={<Products />} errorElement={<ErrorRoutingPage />} />
-          <Route path={ROUTES.ABOUT} element={<About />} errorElement={<ErrorRoutingPage />} />
-          <Route path="/test" element={<TestComponent />} errorElement={<ErrorRoutingPage />} />
+        <AuthProvider>
+          <Header />
+          <Routes>
+            <Route path={ROUTES.HOME} element={<Home />} errorElement={<ErrorRoutingPage />} />
+            <Route
+              path={ROUTES.PRODUCTS}
+              element={
+                <ProtectedRoute>
+                  <Products />
+                </ProtectedRoute>
+              }
+              errorElement={<ErrorRoutingPage />}
+            />
+            <Route
+              path={ROUTES.ABOUT}
+              element={
+                <ProtectedRoute>
+                  <About />
+                </ProtectedRoute>
+              }
+              errorElement={<ErrorRoutingPage />}
+            />
+            <Route
+              path={ROUTES.PROFILE}
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+              errorElement={<ErrorRoutingPage />}
+            />
+            <Route
+              path={ROUTES.CART}
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+              errorElement={<ErrorRoutingPage />}
+            />
+            <Route path="/test" element={<TestComponent />} errorElement={<ErrorRoutingPage />} />
 
-          <Route path={ROUTES.CATCH} element={<Navigate to={ROUTES.HOME} replace />} />
-        </Routes>
-        <Footer />
+            <Route path={ROUTES.CATCH} element={<Navigate to={ROUTES.HOME} replace />} />
+          </Routes>
+          <Footer />
+        </AuthProvider>
       </BrowserRouter>
     );
   }
