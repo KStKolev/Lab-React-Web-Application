@@ -9,7 +9,7 @@ import arrowDropDown from "../../assets/images/icons/arrowDrop.svg";
 import shoppingCartIcon from "../../assets/images/icons/shoppingCart.png";
 import logoutIcon from "../../assets/images/icons/logout.png";
 import * as style from "./navbar.m.scss";
-import { useAuth } from "../../customHooks/authContext";
+import useAuth from "../customHooks/useAuth";
 
 export default function Navbar() {
   const { isAuthenticated, signIn, signUp, logout } = useAuth();

@@ -4,6 +4,8 @@ import "./styles/main.scss";
 import { Component /* , StrictMode */ } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import apiEndpoints from "./api.endpoints";
 import Header from "./components/header/header";
 import Home from "./components/home/home";
@@ -12,7 +14,6 @@ import Profile from "./components/profile/profile";
 import Cart from "./components/cart/Cart";
 import About from "./components/about/about";
 import Footer from "./components/footer/footer";
-import { AuthProvider } from "./customHooks/authContext";
 import ProtectedRoute from "./components/header/protectedRoute";
 import ErrorBoundary from "./components/errorHandler/errorBoundary";
 import ErrorPage from "./components/errorHandler/errorPage";
@@ -48,7 +49,7 @@ class AppContainer extends Component<Props, State> {
   render() {
     return (
       <BrowserRouter>
-        <AuthProvider>
+        <Provider store={store}>
           <Header />
           <Routes>
             <Route path={ROUTES.HOME} element={<Home />} errorElement={<ErrorRoutingPage />} />
@@ -93,7 +94,7 @@ class AppContainer extends Component<Props, State> {
             <Route path={ROUTES.CATCH} element={<Navigate to={ROUTES.HOME} replace />} />
           </Routes>
           <Footer />
-        </AuthProvider>
+        </Provider>
       </BrowserRouter>
     );
   }
