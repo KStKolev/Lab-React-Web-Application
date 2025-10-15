@@ -1,0 +1,43 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconWrapper {
+  position: relative;
+  width: 55%;
+}
+
+.label {
+  font-size: 1.4rem;
+  color: rgb(255, 255, 255);
+}
+
+.inputField {
+  font-size: 0.9rem;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  padding: 1.4em 4em 1.4em 1em;
+  outline: none;
+}
+
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 20px;
+  transform: translateY(-50%);
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+.errorMessage {
+  font-size: 0.875rem;
+  color: red;
+  text-align: right;
+  margin-top: 1em;
+}

@@ -4,8 +4,10 @@
 }
 
 .navItem {
-  font-size: 0.85rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
   color: rgb(217, 220, 206);
   padding: 1em 1.3em 0.8em;
   border-bottom: 5px solid transparent;
@@ -13,20 +15,45 @@
   text-decoration: none;
   outline: none;
   cursor: pointer;
-}
 
-.navItem:focus-visible,
-.navItem:hover {
-  background-color: rgb(62, 62, 62);
+  &:focus-visible,
+  &:hover {
+    background-color: rgb(62, 62, 62);
+  }
 }
 
 .active {
   border-color: rgb(155, 50, 203);
   background-color: rgb(44, 44, 44);
+
+  &:focus-visible {
+    background-color: rgb(44, 44, 44);
+  }
 }
 
-.navItem.active:focus-visible {
-  background-color: rgb(44, 44, 44);
+.navButtonItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.navButton {
+  height: 100%;
+  font-size: 0.875rem;
+  color: rgb(217, 220, 206);
+  border: 0;
+  border-bottom: 5px solid transparent;
+  background-color: transparent;
+  padding: 1em 1.3em 0.8em;
+  transition: 0.4s ease-in-out;
+  outline: none;
+  cursor: pointer;
+
+  &:focus-visible,
+  &:hover {
+    background-color: rgb(62, 62, 62);
+  }
 }
 
 .dropdownWrapper {
@@ -35,35 +62,43 @@
 }
 
 .dropdown {
-  display: flex;
-  align-items: center;
-  border: 0;
-  border-bottom: 5px solid transparent;
+  height: 100%;
+  border-width: 0 0 5px 0;
   background-color: rgb(18, 18, 18);
 }
 
 .arrowDropdown {
-  width: 20px;
-  transform: rotate(180deg);
+  width: 30px;
+  transform: rotate(360deg);
   transition: transform 0.4s ease-in-out;
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
 }
 
 .open {
-  transform: rotate(360deg);
+  transform: rotate(180deg);
 }
 
 .dropdownContent {
-  display: flex;
-  flex-direction: column;
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: rgb(18, 18, 18);
 }
 
-.dropdownItem {
-  text-align: center;
-  padding: 1em;
+.userIcon,
+.cartIcon,
+.logoutIcon {
+  width: 20px;
+  filter: brightness(0) saturate(100%) invert(95%) sepia(11%) saturate(181%) hue-rotate(32deg) brightness(94%) contrast(86%);
+}
+
+.userIcon,
+.cartIcon {
+  margin-right: 0.4em;
+}
+
+.cartItemCount {
+  margin-left: 0.5em;
 }

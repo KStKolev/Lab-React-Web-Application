@@ -5,6 +5,8 @@ export const ROUTES = {
   PS: "/products/ps",
   XBOX: "/products/xbox",
   ABOUT: "/about",
+  PROFILE: "/profile",
+  CART: "/cart",
   CATCH: "*",
 } as const;
 
