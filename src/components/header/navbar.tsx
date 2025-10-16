@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes";
-import AuthModal from "../modal/authModal";
+import Modal from "../modal/modal";
 import SignIn from "../auth/signIn";
 import SignUp from "../auth/signUp";
 import userIcon from "../../assets/images/icons/user.png";
@@ -9,7 +9,7 @@ import arrowDropDown from "../../assets/images/icons/arrowDrop.svg";
 import shoppingCartIcon from "../../assets/images/icons/shoppingCart.png";
 import logoutIcon from "../../assets/images/icons/logout.png";
 import * as style from "./navbar.m.scss";
-import { useAuth } from "../../customHooks/authContext";
+import useAuth from "../customHooks/useAuth";
 
 export default function Navbar() {
   const { isAuthenticated, signIn, signUp, logout } = useAuth();
@@ -121,7 +121,7 @@ export default function Navbar() {
       </ul>
 
       {showSignIn && (
-        <AuthModal onClose={() => setShowSignIn(false)} modalTitle="Authorization">
+        <Modal onClose={() => setShowSignIn(false)} modalTitle="Authorization">
           <SignIn
             onSignInSuccess={() => {
               signIn();
@@ -132,18 +132,18 @@ export default function Navbar() {
               }
             }}
           />
-        </AuthModal>
+        </Modal>
       )}
 
       {showSignUp && (
-        <AuthModal onClose={() => setShowSignUp(false)} modalTitle="Registration">
+        <Modal onClose={() => setShowSignUp(false)} modalTitle="Registration">
           <SignUp
             onSignUpSuccess={() => {
               signUp();
               setShowSignUp(false);
             }}
           />
-        </AuthModal>
+        </Modal>
       )}
     </nav>
   );

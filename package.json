@@ -81,8 +81,10 @@
     "webpack-obsolete-plugin": "^1.0.5"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.3",
     "web-ui-pack": "^1.2.4"
   },
