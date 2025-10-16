@@ -17,6 +17,7 @@ interface SignUpErrors {
 
 interface SignUpProps {
   onSignUpSuccess: () => void;
+  signUp: (user: object) => void;
 }
 
 export default function SignUp(props: SignUpProps) {
@@ -69,8 +70,9 @@ export default function SignUp(props: SignUpProps) {
       body: JSON.stringify({ username, password }),
     }).then((res) => res.json());
 
-    if (response.code === 201) {
+    if (response.code === 201 && response.user) {
       resetForm();
+      props.signUp(response.user);
       props.onSignUpSuccess();
       navigate(routes.PROFILE);
     } else if (response.code === 400) {
@@ -79,7 +81,7 @@ export default function SignUp(props: SignUpProps) {
   };
 
   return (
-    <form className={styles.signForm} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <InputText
         label="Login"
         name="username"
@@ -107,8 +109,8 @@ export default function SignUp(props: SignUpProps) {
         onChange={(e) => setConfirmPassword(e.target.value)}
         error={errors.confirmPassword}
       />
-      {errors.submitError && <span className={styles.errorText}>{errors.submitError}</span>}
-      <button className={styles.signButton} type="submit">
+      {errors.submitError && <span className={styles.errorMessage}>{errors.submitError}</span>}
+      <button className={styles.submitButton} type="submit">
         Submit
       </button>
     </form>
