@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import apiEndpoints from "@/api.endpoints";
-import InputText from "../../elements/inputText";
-import Textarea from "../../elements/textarea";
+import ProfileForm from "./profileForm";
+import ProfilePicture from "./profilePicture";
 import Modal from "../modal/modal";
 import ChangePassword from "../auth/changePassword";
 import backgroundImage from "../../assets/images/background.jpg";
-import defaultProfilePicture from "../../assets/images/noPhoto.jpg";
-import signInIcon from "../../assets/images/icons/signInInput.svg";
 import useAuth from "../customHooks/useAuth";
 import * as styles from "./profile.m.scss";
 
@@ -80,58 +78,20 @@ export default function Profile() {
     }
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (!file) {
-      return;
-    }
-
-    const imageUrl = URL.createObjectURL(file);
-    setProfilePicture(imageUrl);
-  };
-
   return (
     <main className={styles.profileMain} style={{ backgroundImage: `url(${backgroundImage})` }}>
       <section className={styles.profileSection}>
         <h1 className={styles.profileTitle}>{user?.username} profile page</h1>
         <hr />
         <div className={styles.profileContent}>
-          <div className={styles.profileImageContainer}>
-            <img src={profilePicture || defaultProfilePicture} className={styles.profileImage} alt="Profile" />
-            <button
-              type="button"
-              className={styles.profileButton}
-              onClick={() => {
-                document.getElementById("profileImageInput")?.click();
-              }}
-            >
-              Change profile image
-            </button>
-            <input type="file" accept="image/*" id="profileImageInput" style={{ display: "none" }} onChange={handleImageChange} />
-          </div>
-          <div>
-            <form className={styles.profileForm}>
-              <InputText
-                label="Username"
-                name="username"
-                type="text"
-                value={username}
-                error={errors.username}
-                iconUrl={signInIcon}
-                vertical
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <Textarea
-                label="Profile Description"
-                name="profileDescription"
-                value={profileDescription}
-                error={errors.profileDescription}
-                vertical
-                onChange={(e) => setProfileDescription(e.target.value)}
-              />
-            </form>
-          </div>
+          <ProfilePicture profilePicture={profilePicture} onChange={setProfilePicture} />
+          <ProfileForm
+            username={username}
+            profileDescription={profileDescription}
+            errors={errors}
+            setUsername={setUsername}
+            setProfileDescription={setProfileDescription}
+          />
           <div className={styles.profileButtons}>
             <button type="button" className={styles.profileButton} onClick={handleSubmit}>
               Save profile
