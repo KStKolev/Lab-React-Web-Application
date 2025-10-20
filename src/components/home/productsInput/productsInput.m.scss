@@ -16,7 +16,7 @@
   width: 100%;
   color: rgb(133, 130, 134);
   border: 2px solid rgb(133, 130, 134);
-  background-color: rgba(13, 15, 19, 0.636);
+  background-color: rgba(0, 0, 0, 0.301);
   border-radius: 1rem;
   padding: 0.7em;
   outline: none;
@@ -55,18 +55,18 @@
   padding: 0.7em 1em;
   outline: none;
   transition: all 0.2s;
-}
 
-.dropdownItem:hover,
-.dropdownItem:focus {
-  background-color: rgba(133, 130, 134, 0.1);
+  &:hover,
+  &:focus {
+    background-color: rgba(133, 130, 134, 0.1);
+  }
 }
 
 .dropdownItemFocused {
   background-color: rgba(133, 130, 134, 0.2);
-}
 
-.dropdownItemFocused:hover,
-.dropdownItemFocused:focus {
-  background-color: rgba(133, 130, 134, 0.3);
+  &:hover,
+  &:focus {
+    background-color: rgba(133, 130, 134, 0.3);
+  }
 }

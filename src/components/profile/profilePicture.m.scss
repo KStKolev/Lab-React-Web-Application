@@ -1,0 +1,14 @@
+.profileImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.profileImage {
+  width: 280px;
+  height: 370px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}

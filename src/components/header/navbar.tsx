@@ -12,12 +12,12 @@ import * as style from "./navbar.m.scss";
 import useAuth from "../customHooks/useAuth";
 
 export default function Navbar() {
-  const { isAuthenticated, signIn, signUp, logout } = useAuth();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
-  const navigate = useNavigate();
   const [pendingNav, setPendingNav] = useState<string | null>(null);
+  const { user, signIn, signUp, logout } = useAuth();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export default function Navbar() {
         setIsOpen(false);
       }
     }
-
     document.addEventListener("click", handleClickOutside);
 
     return () => {
@@ -36,7 +35,7 @@ export default function Navbar() {
   }, []);
 
   const handleProtectedNav = (e: React.MouseEvent, route: string) => {
-    if (!isAuthenticated) {
+    if (!user) {
       e.preventDefault();
       setPendingNav(route);
       setShowSignIn(true);
@@ -88,11 +87,11 @@ export default function Navbar() {
         >
           About
         </NavLink>
-        {isAuthenticated ? (
+        {user ? (
           <>
             <NavLink to={ROUTES.PROFILE} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
               <img src={userIcon} className={style.userIcon} alt="User Icon" />
-              User Name
+              {user.username}
             </NavLink>
             <NavLink to={ROUTES.CART} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
               <img src={shoppingCartIcon} className={style.cartIcon} alt="Cart Icon" />
@@ -123,8 +122,8 @@ export default function Navbar() {
       {showSignIn && (
         <Modal onClose={() => setShowSignIn(false)} modalTitle="Authorization">
           <SignIn
+            signIn={signIn}
             onSignInSuccess={() => {
-              signIn();
               setShowSignIn(false);
               if (pendingNav) {
                 navigate(pendingNav);
@@ -138,8 +137,8 @@ export default function Navbar() {
       {showSignUp && (
         <Modal onClose={() => setShowSignUp(false)} modalTitle="Registration">
           <SignUp
+            signUp={signUp}
             onSignUpSuccess={() => {
-              signUp();
               setShowSignUp(false);
             }}
           />

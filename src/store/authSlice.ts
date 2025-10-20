@@ -2,33 +2,42 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface AuthState {
-  isAuthenticated: boolean;
+  user?: {
+    username: string;
+    password: string;
+    profileDescription: string;
+    profilePicture: string;
+  } | null;
 }
 
-const AUTH_KEY = "isAuthenticated";
+const AUTH_USER = "currentUser";
 
 const initialState: AuthState = {
-  isAuthenticated: localStorage.getItem(AUTH_KEY) === "true",
+  user: JSON.parse(localStorage.getItem(AUTH_USER) || "null"),
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    signIn(state) {
-      state.isAuthenticated = true;
-      localStorage.setItem(AUTH_KEY, "true");
+    signIn(state, action) {
+      localStorage.setItem(AUTH_USER, JSON.stringify(action.payload));
+      state.user = action.payload;
     },
-    signUp(state) {
-      state.isAuthenticated = true;
-      localStorage.setItem(AUTH_KEY, "true");
+    signUp(state, action) {
+      localStorage.setItem(AUTH_USER, JSON.stringify(action.payload));
+      state.user = action.payload;
     },
     logout(state) {
-      state.isAuthenticated = false;
-      localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(AUTH_USER);
+      state.user = null;
+    },
+    updateUser(state, action) {
+      localStorage.setItem(AUTH_USER, JSON.stringify(action.payload));
+      state.user = action.payload;
     },
   },
 });
 
-export const { signIn, signUp, logout } = authSlice.actions;
+export const { signIn, signUp, logout, updateUser } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,10 +1,10 @@
-.signForm {
+.form {
   display: flex;
   flex-direction: column;
   gap: 4em;
 }
 
-.signButton {
+.submitButton {
   width: 50%;
   font-size: 1.4em;
   color: white;
@@ -21,7 +21,7 @@
   }
 }
 
-.errorText {
+.errorMessage {
   color: red;
   font-size: 0.875rem;
   text-align: end;

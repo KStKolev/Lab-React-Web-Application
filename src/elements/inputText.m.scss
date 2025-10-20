@@ -4,13 +4,34 @@
   justify-content: space-between;
 }
 
-.iconWrapper {
-  position: relative;
+.inputWrapperVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+
+.inputContainer,
+.inputContainerVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+}
+
+.inputContainer {
   width: 55%;
 }
 
+.inputContainerVertical {
+  width: 100%;
+}
+
+.iconWrapper {
+  position: relative;
+}
+
 .label {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: rgb(255, 255, 255);
 }
 
@@ -19,7 +40,7 @@
   color: rgb(255, 255, 255);
   width: 100%;
   border: 2px solid rgb(255, 255, 255);
-  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.311);
   padding: 1.4em 4em 1.4em 1em;
   outline: none;
 }
@@ -39,5 +60,4 @@
   font-size: 0.875rem;
   color: red;
   text-align: right;
-  margin-top: 1em;
 }

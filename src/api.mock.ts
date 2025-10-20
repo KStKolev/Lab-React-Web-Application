@@ -70,8 +70,8 @@ const gameNames = [
 ];
 
 const mockUsers = [
-  { username: "test", password: "123456" },
-  { username: "user", password: "green" },
+  { username: "test", password: "123456", profileDescription: "just a user", profilePicture: "" },
+  { username: "user", password: "green", profileDescription: "just another user", profilePicture: "" },
 ];
 
 export default webpackMockServer.add((app) => {
@@ -97,7 +97,14 @@ export default webpackMockServer.add((app) => {
       return res.status(401).json({ code: 401, error: "Invalid username or password" });
     }
 
-    return res.status(200).json({ code: 200 });
+    const loggedInUser = {
+      username: userExists.username,
+      profileDescription: userExists.profileDescription,
+      profilePicture: userExists.profilePicture,
+      password: userExists.password,
+    };
+
+    return res.status(200).json({ code: 200, user: loggedInUser });
   });
 
   app.put(apiEndpoints.signUp, (_req, res) => {
@@ -109,8 +116,58 @@ export default webpackMockServer.add((app) => {
       return res.status(400).json({ code: 400, error: "Username already exists" });
     }
 
-    mockUsers.push({ username, password });
+    const newUser = { username, password, profileDescription: "", profilePicture: "" };
 
-    return res.status(201).json({ code: 201 });
+    mockUsers.push(newUser);
+
+    return res.status(201).json({ code: 201, user: newUser });
+  });
+
+  app.get(`${apiEndpoints.getProfile}/:username`, (req, res) => {
+    const username = req.params.username.toString();
+    const existingUser = mockUsers.find((u) => u.username === username);
+
+    if (!existingUser) {
+      return res.status(400).json({ code: 400, error: "User not found" });
+    }
+
+    return res.status(200).json({ code: 200, user: existingUser });
+  });
+
+  app.post(apiEndpoints.saveProfile, (_req, res) => {
+    const { user, username, profileDescription, profilePicture } = _req.body;
+
+    const existingUser = mockUsers.find((u) => u.username === user.username);
+
+    if (!existingUser) {
+      return res.status(400).json({ code: 400, error: "User not found" });
+    }
+
+    existingUser.username = username;
+    existingUser.profileDescription = profileDescription;
+
+    if (profilePicture && profilePicture.startsWith("blob:")) {
+      existingUser.profilePicture = profilePicture;
+    }
+
+    return res.status(200).json({ code: 200, updatedUser: existingUser });
+  });
+
+  app.post(apiEndpoints.changePassword, (_req, res) => {
+    const { user, oldPassword, newPassword } = _req.body;
+
+    const existingUser = mockUsers.find((u) => u.username === user.username);
+
+    if (!existingUser) {
+      return res.status(400).json({ code: 400, error: "User not found" });
+    }
+
+    if (existingUser.password !== oldPassword) {
+      return res.status(400).json({ code: 400, error: "Old password is incorrect" });
+    }
+
+    existingUser.password = newPassword;
+
+    return res.status(200).json({ code: 200, updatedUser: existingUser });
   });
 });

@@ -1,0 +1,36 @@
+.textareaWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.textareaWrapperVertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+
+.label {
+  font-size: 1.3rem;
+  color: rgb(255, 255, 255);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 180px;
+  max-height: 300px;
+  font-size: 0.9rem;
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.311);
+  padding: 1.4em 3em 1.4em 1em;
+  outline: none;
+}
+
+.errorMessage {
+  font-size: 0.875rem;
+  color: red;
+  text-align: right;
+  margin-top: 1em;
+}
