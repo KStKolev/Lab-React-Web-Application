@@ -1,0 +1,27 @@
+.filterProductsContainer {
+  margin: 2em 0em;
+}
+
+.filterTitle {
+  font-size: 1.25rem;
+  font-weight: normal;
+  color: rgb(192, 191, 191);
+  margin: 1em 0.4em 0.5em;
+}
+
+.filterContainer {
+  margin: 1.5em 0em 1em 0.4em;
+}
+
+.filterLabel {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.4em;
+  color: rgb(192, 191, 191);
+}
+
+.filterInput {
+  margin-right: 0.3em;
+  accent-color: rgb(0, 0, 255);
+  outline: none;
+}
