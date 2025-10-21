@@ -1,7 +1,8 @@
 const apiEndpoints = {
   testMock: "/api/testMock",
-  searchGames: "/api/search",
-  topGames: "/api/products/top",
+  searchProducts: "/api/search",
+  topProducts: "/api/products/top",
+  getProducts: "/api/products",
   signIn: "/api/auth/signIn",
   signUp: "/api/auth/signUp",
   getProfile: "/api/getProfile",
