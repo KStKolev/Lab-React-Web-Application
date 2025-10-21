@@ -1,0 +1,72 @@
+.searchContainer {
+  position: relative;
+  width: 70%;
+  margin: 3em auto 0;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.productsInput {
+  display: block;
+  font-size: 1.2rem;
+  width: 100%;
+  color: rgb(218, 218, 218);
+  border: 2px solid rgb(166, 166, 166);
+  background-color: rgba(0, 0, 0, 0.301);
+  border-radius: 1.5rem;
+  padding: 0.8em 1.3em;
+  outline: none;
+}
+
+.iconWrapper {
+  position: absolute;
+  right: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1em;
+}
+
+.loaderIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.dropdown {
+  position: absolute;
+  width: 100%;
+  max-height: 300px;
+  border: 2px solid rgb(133, 130, 134);
+  background-color: rgba(13, 15, 19, 0.95);
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  overflow-y: auto;
+  cursor: pointer;
+}
+
+.dropdownItem {
+  color: rgb(133, 130, 134);
+  border-bottom: 1px solid rgba(133, 130, 134, 0.3);
+  padding: 0.7em 1em;
+  outline: none;
+  transition: all 0.2s;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(133, 130, 134, 0.1);
+  }
+}
+
+.dropdownItemFocused {
+  background-color: rgba(133, 130, 134, 0.2);
+
+  &:hover,
+  &:focus {
+    background-color: rgba(133, 130, 134, 0.3);
+  }
+}
