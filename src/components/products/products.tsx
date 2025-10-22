@@ -44,8 +44,6 @@ export default function Products() {
 
     if (productsData.length !== 0) {
       setTimer(0);
-    } else {
-      setTimer(500);
     }
 
     return productsData;
