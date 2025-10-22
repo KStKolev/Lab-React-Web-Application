@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
 import { signIn, signUp, logout, updateUser } from "../../store/authSlice";
-import { ROUTES } from "../../routes";
+import routes from "../../routes";
 
 export default function useAuth() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export default function useAuth() {
   const handleSignUp = (userData: object) => dispatch(signUp(userData));
   const handleLogout = () => {
     dispatch(logout());
-    navigate(ROUTES.HOME);
+    navigate(routes.HOME);
   };
   const handleUpdateUser = (userData: object) => dispatch(updateUser(userData));
 

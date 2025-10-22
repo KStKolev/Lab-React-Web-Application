@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { ReactNode } from "react";
 import useAuth from "../customHooks/useAuth";
-import { ROUTES } from "../../routes";
+import routes from "../../routes";
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -9,5 +9,5 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user } = useAuth();
-  return user ? children : <Navigate to={ROUTES.HOME} replace />;
+  return user ? children : <Navigate to={routes.HOME} replace />;
 }
