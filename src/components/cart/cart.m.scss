@@ -1,0 +1,77 @@
+.cartMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+}
+
+.cartSection {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.301);
+  border-radius: 3rem;
+  padding: 2em;
+  margin: 2em 1em;
+}
+
+.cartOverlay {
+  width: 95%;
+  justify-self: center;
+}
+
+.cartTitle {
+  font-size: 1.6rem;
+  font-weight: normal;
+  text-align: start;
+  color: rgb(192, 191, 191);
+  margin: 0.4em 0.6em;
+}
+
+.cartTable {
+  width: 100%;
+  text-align: center;
+
+  & tr {
+    margin: 3em;
+  }
+
+  & td {
+    padding: 1em;
+  }
+}
+
+.cartTableHead {
+  & > tr {
+    border-bottom: 2px solid rgb(192, 191, 191);
+  }
+}
+
+.cartTableBody {
+  & > tr {
+    border-bottom: 2px solid rgb(110, 110, 110);
+  }
+}
+
+.cartTableHeadRow {
+  & > th {
+    font-size: 1.1rem;
+    color: rgb(192, 191, 191);
+    padding: 1.2em 0em;
+  }
+}
+
+.cartTableRemoveRow {
+  text-align: right;
+}
+
+.cartTableButton {
+  font-size: 1rem;
+  font-weight: normal;
+  color: white;
+  background-color: rgba(75, 30, 96, 0.785);
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+}
