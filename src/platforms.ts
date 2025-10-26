@@ -1,8 +1,9 @@
-export const PLATFORMS = {
+const platforms = {
   PC: "PC",
   PS: "PS",
   Xbox: "Xbox",
-} as const;
+};
 
-export type PlatformType = keyof typeof PLATFORMS;
-export default PLATFORMS;
+export type PlatformType = keyof typeof platforms;
+export const allowedCategories = Object.keys(platforms).map((key) => key.toLowerCase());
+export default platforms;

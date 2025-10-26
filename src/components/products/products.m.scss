@@ -1,6 +1,30 @@
-.productsSection {
+.productsMain {
+  display: flex;
+  align-items: flex-start;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.productsTitle {
+  font-size: 1.6rem;
+  font-weight: normal;
+  text-align: start;
+  color: rgb(192, 191, 191);
+  margin: 0.4em 0.6em;
+}
+
+.productsContent {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 2em 0;
+  gap: 2.5em;
+  width: 100%;
+}
+
+.productsSection {
+  width: 100%;
+  padding: 2em;
+  border-radius: 3rem;
+  background-color: rgba(0, 0, 0, 0.301);
 }

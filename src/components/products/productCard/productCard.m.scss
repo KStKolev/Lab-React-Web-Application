@@ -2,6 +2,7 @@
   width: 250px;
   height: 400px;
   perspective: 1000px;
+  margin-bottom: 2rem;
 }
 
 .flipCardInner {
@@ -53,11 +54,11 @@
   cursor: pointer;
 }
 
-.gameDescription {
+.productDescription {
   text-align: left;
 }
 
-.gameAge {
+.productAge {
   margin: 1em 0 1.7em;
 }
 
@@ -66,7 +67,7 @@
   transform: rotateY(180deg);
 }
 
-.gameImage {
+.productImage {
   display: block;
   height: 300px;
   object-fit: cover;
@@ -77,8 +78,8 @@
   justify-content: space-between;
 }
 
-.gameTitle,
-.gamePrice {
+.productTitle,
+.productPrice {
   font-size: 1rem;
   margin: 0.7em;
 }

@@ -1,4 +1,4 @@
-.categoryContainer {
+.categoryButton {
   text-align: center;
   border: 2px solid rgb(133, 133, 133);
   border-bottom: 7px solid rgb(234, 233, 233);
@@ -7,10 +7,10 @@
   padding: 2em 8em;
   transition: 0.4s ease-in-out;
   cursor: pointer;
-}
 
-.categoryContainer:hover {
-  border-color: rgb(134, 44, 182);
+  &:hover {
+    border-color: rgb(134, 44, 182);
+  }
 }
 
 .categoryName {

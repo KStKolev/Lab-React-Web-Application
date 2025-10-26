@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ROUTES } from "../../routes";
+import routes from "../../routes";
 import Modal from "../modal/modal";
 import SignIn from "../auth/signIn";
 import SignUp from "../auth/signUp";
@@ -8,8 +8,8 @@ import userIcon from "../../assets/images/icons/user.png";
 import arrowDropDown from "../../assets/images/icons/arrowDrop.svg";
 import shoppingCartIcon from "../../assets/images/icons/shoppingCart.png";
 import logoutIcon from "../../assets/images/icons/logout.png";
-import * as style from "./navbar.m.scss";
 import useAuth from "../customHooks/useAuth";
+import * as style from "./navbar.m.scss";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function Navbar() {
   return (
     <nav>
       <ul className={style.navList}>
-        <NavLink to={ROUTES.HOME} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
+        <NavLink to={routes.HOME} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
           Home
         </NavLink>
         <div className={style.dropdownWrapper} ref={dropdownRef}>
@@ -57,23 +57,23 @@ export default function Navbar() {
           {isOpen && (
             <div className={style.dropdownContent}>
               <NavLink
-                to={ROUTES.PC}
+                to={routes.PC}
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
-                onClick={(e) => handleProtectedNav(e, ROUTES.PC)}
+                onClick={(e) => handleProtectedNav(e, routes.PC)}
               >
                 PC
               </NavLink>
               <NavLink
-                to={ROUTES.PS}
+                to={routes.PS}
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
-                onClick={(e) => handleProtectedNav(e, ROUTES.PS)}
+                onClick={(e) => handleProtectedNav(e, routes.PS)}
               >
                 Playstation 5
               </NavLink>
               <NavLink
-                to={ROUTES.XBOX}
+                to={routes.XBOX}
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
-                onClick={(e) => handleProtectedNav(e, ROUTES.XBOX)}
+                onClick={(e) => handleProtectedNav(e, routes.XBOX)}
               >
                 XBox One
               </NavLink>
@@ -81,19 +81,19 @@ export default function Navbar() {
           )}
         </div>
         <NavLink
-          to={ROUTES.ABOUT}
+          to={routes.ABOUT}
           className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
-          onClick={(e) => handleProtectedNav(e, ROUTES.ABOUT)}
+          onClick={(e) => handleProtectedNav(e, routes.ABOUT)}
         >
           About
         </NavLink>
         {user ? (
           <>
-            <NavLink to={ROUTES.PROFILE} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
+            <NavLink to={routes.PROFILE} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
               <img src={userIcon} className={style.userIcon} alt="User Icon" />
               {user.username}
             </NavLink>
-            <NavLink to={ROUTES.CART} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
+            <NavLink to={routes.CART} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
               <img src={shoppingCartIcon} className={style.cartIcon} alt="Cart Icon" />
               <span className={style.cartItemCount}>0</span>
             </NavLink>

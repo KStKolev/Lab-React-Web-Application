@@ -1,8 +1,8 @@
-import * as style from "./platforms.m.scss";
+import { PlatformType } from "../../../platforms";
 import PCIcon from "../../../assets/images/platforms/pc.png";
 import PlayStationIcon from "../../../assets/images/platforms/ps.png";
 import XboxIcon from "../../../assets/images/platforms/xbox.png";
-import { PlatformType } from "../../../platforms";
+import * as style from "./platforms.m.scss";
 
 interface PlatformsProps {
   platforms: PlatformType[];

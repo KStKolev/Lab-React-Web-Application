@@ -1,4 +1,4 @@
-export const ROUTES = {
+const routes = {
   HOME: "/",
   PRODUCTS: "/products/:category",
   PC: "/products/pc",
@@ -8,6 +8,6 @@ export const ROUTES = {
   PROFILE: "/profile",
   CART: "/cart",
   CATCH: "*",
-} as const;
+};
 
-export default ROUTES;
+export default routes;

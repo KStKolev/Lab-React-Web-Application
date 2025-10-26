@@ -10,9 +10,9 @@ export default function Categories() {
       <h2 className={style.categoryTitle}>Categories</h2>
       <hr />
       <div className={style.categoriesContainer}>
-        <Category iconUrl={pcImage} name="PC" />
-        <Category iconUrl={psImage} name="Playstation 5" />
-        <Category iconUrl={xboxImage} name="Xbox One" />
+        <Category iconUrl={pcImage} name="PC" urlProperty="PC" />
+        <Category iconUrl={psImage} name="Playstation 5" urlProperty="PS" />
+        <Category iconUrl={xboxImage} name="Xbox One" urlProperty="XBOX" />
       </div>
     </section>
   );

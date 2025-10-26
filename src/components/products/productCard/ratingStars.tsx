@@ -1,6 +1,6 @@
-import * as style from "./ratingStars.m.scss";
-import emptyStar from "../../../assets/images/icons/star.svg";
 import filledStar from "../../../assets/images/icons/starFilled.svg";
+import emptyStar from "../../../assets/images/icons/star.svg";
+import * as style from "./ratingStars.m.scss";
 
 interface RatingStarsProps {
   rating: number;

@@ -1,4 +1,4 @@
-.newGamesSection {
+.newProductsSection {
   width: 95%;
   justify-self: center;
   padding: 2em;
@@ -6,13 +6,13 @@
   background-color: rgba(0, 0, 0, 0.301);
 }
 
-.newGamesTitle {
+.newProductsTitle {
   font-size: 1.4rem;
   color: rgb(192, 191, 191);
   margin: 0em 0.6em;
 }
 
-.newGamesContainer {
+.newProductsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 2em;

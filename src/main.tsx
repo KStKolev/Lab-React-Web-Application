@@ -17,7 +17,7 @@ import Footer from "./components/footer/footer";
 import ProtectedRoute from "./components/header/protectedRoute";
 import ErrorBoundary from "./components/errorHandler/errorBoundary";
 import ErrorPage from "./components/errorHandler/errorPage";
-import { ROUTES } from "./routes";
+import routes from "./routes";
 import TestComponent from "./components/testComponent";
 import ErrorRoutingPage from "./components/errorHandler/errorRoutingPage";
 
@@ -52,9 +52,9 @@ class AppContainer extends Component<Props, State> {
         <Provider store={store}>
           <Header />
           <Routes>
-            <Route path={ROUTES.HOME} element={<Home />} errorElement={<ErrorRoutingPage />} />
+            <Route path={routes.HOME} element={<Home />} errorElement={<ErrorRoutingPage />} />
             <Route
-              path={ROUTES.PRODUCTS}
+              path={routes.PRODUCTS}
               element={
                 <ProtectedRoute>
                   <Products />
@@ -63,7 +63,7 @@ class AppContainer extends Component<Props, State> {
               errorElement={<ErrorRoutingPage />}
             />
             <Route
-              path={ROUTES.ABOUT}
+              path={routes.ABOUT}
               element={
                 <ProtectedRoute>
                   <About />
@@ -72,7 +72,7 @@ class AppContainer extends Component<Props, State> {
               errorElement={<ErrorRoutingPage />}
             />
             <Route
-              path={ROUTES.PROFILE}
+              path={routes.PROFILE}
               element={
                 <ProtectedRoute>
                   <Profile />
@@ -81,7 +81,7 @@ class AppContainer extends Component<Props, State> {
               errorElement={<ErrorRoutingPage />}
             />
             <Route
-              path={ROUTES.CART}
+              path={routes.CART}
               element={
                 <ProtectedRoute>
                   <Cart />
@@ -91,7 +91,7 @@ class AppContainer extends Component<Props, State> {
             />
             <Route path="/test" element={<TestComponent />} errorElement={<ErrorRoutingPage />} />
 
-            <Route path={ROUTES.CATCH} element={<Navigate to={ROUTES.HOME} replace />} />
+            <Route path={routes.CATCH} element={<Navigate to={routes.HOME} replace />} />
           </Routes>
           <Footer />
         </Provider>
