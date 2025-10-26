@@ -10,6 +10,10 @@ const mockData = {
   email: "willsmith321@gmail.com",
 };
 
+const parseAgeRating = (ageString: string): number => {
+  return parseInt(ageString.replace("+", ""), 10);
+};
+
 const gamesMockData = [
   {
     id: 1,
@@ -240,7 +244,8 @@ export default webpackMockServer.add((app) => {
     }
 
     if (age && age !== "all ages") {
-      results = results.filter((g) => g.age.toLowerCase() === age);
+      const selectedAgeValue = parseAgeRating(age as string);
+      results = results.filter((g) => parseAgeRating(g.age) <= selectedAgeValue);
     }
 
     const searchName = req.query.searchName as string;
