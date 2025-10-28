@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import { AUTH_USER } from "@/localStorage";
+import { AUTH_USER } from "@/utils/localStorage";
 
 interface AuthState {
   user?: {
@@ -8,6 +8,7 @@ interface AuthState {
     password: string;
     profileDescription: string;
     profilePicture: string;
+    authority: "user" | "admin";
   } | null;
 }
 
