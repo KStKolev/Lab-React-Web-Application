@@ -1,0 +1,22 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  width: 100%;
+}
+
+.iconWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+}
+
+.errorMessage {
+  font-size: 0.875rem;
+  color: red;
+  text-align: right;
+}

@@ -1,39 +1,7 @@
 .searchContainer {
   position: relative;
   width: 70%;
-  margin: 3em auto 0;
-}
-
-.inputWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.productsInput {
-  display: block;
-  font-size: 1.2rem;
-  width: 100%;
-  color: rgb(218, 218, 218);
-  border: 2px solid rgb(166, 166, 166);
-  background-color: rgba(0, 0, 0, 0.301);
-  border-radius: 1.5rem;
-  padding: 0.8em 1.3em;
-  outline: none;
-}
-
-.iconWrapper {
-  position: absolute;
-  right: 0%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1em;
-}
-
-.loaderIcon {
-  width: 40px;
-  height: 40px;
+  margin: 3em 0 0;
 }
 
 .dropdown {

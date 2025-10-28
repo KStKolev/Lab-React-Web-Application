@@ -1,23 +1,25 @@
-import { SearchInputProps } from "@/interfaces/searchInput";
+import { forwardRef } from "react";
+import { SearchInputProps } from "@/utils/interfaces/searchInput";
+import Input from "./input";
 import loadingIcon from "../assets/images/loading.svg";
 import * as style from "./inputSearch.m.scss";
 
-export default function InputSearch(props: SearchInputProps) {
+const InputSearch = forwardRef<HTMLInputElement, SearchInputProps>((props, ref) => {
   return (
     <div className={style.searchContainer}>
-      <div className={style.inputWrapper}>
-        <input
-          ref={props.inputRef}
-          className={style.productsInput}
-          type="text"
-          placeholder={props.placeholder}
-          value={props.value}
-          onChange={props.onChange}
-          onKeyDown={props.onKeyDown}
-          onFocus={props.onFocus}
-        />
-        <div className={style.iconWrapper}>{props.loading && <img src={loadingIcon} alt="Loading..." className={style.loaderIcon} />}</div>
-      </div>
+      <Input
+        ref={ref}
+        type="text"
+        name="text"
+        placeholder={props.placeholder}
+        value={props.value}
+        onChange={props.onChange}
+        onKeyDown={props.onKeyDown}
+        onFocus={props.onFocus}
+        inputRef={props.inputRef}
+        iconUrl={props.loading ? loadingIcon : undefined}
+        customStyles={props.customStyles}
+      />
 
       {props.showDropdown && props.results && props.results.length > 0 && (
         <div ref={props.dropdownRef} className={style.dropdown}>
@@ -42,4 +44,6 @@ export default function InputSearch(props: SearchInputProps) {
       )}
     </div>
   );
-}
+});
+
+export default InputSearch;
