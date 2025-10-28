@@ -9,6 +9,7 @@ import arrowDropDown from "../../assets/images/icons/arrowDrop.svg";
 import shoppingCartIcon from "../../assets/images/icons/shoppingCart.png";
 import logoutIcon from "../../assets/images/icons/logout.png";
 import useAuth from "../customHooks/useAuth";
+import useCart from "../customHooks/useCart";
 import * as style from "./navbar.m.scss";
 
 export default function Navbar() {
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [pendingNav, setPendingNav] = useState<string | null>(null);
+  const { cartCount } = useCart();
   const { user, signIn, signUp, logout } = useAuth();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -95,7 +97,7 @@ export default function Navbar() {
             </NavLink>
             <NavLink to={routes.CART} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
               <img src={shoppingCartIcon} className={style.cartIcon} alt="Cart Icon" />
-              <span className={style.cartItemCount}>0</span>
+              <span className={style.cartItemCount}>{cartCount}</span>
             </NavLink>
             <li className={style.navButtonItem}>
               <button type="button" className={style.navButton} onClick={logout}>

@@ -1,0 +1,22 @@
+.cartProductRow {
+  font-size: 1.05rem;
+  color: rgb(192, 191, 191);
+}
+
+.cartProductAmountCell {
+  width: 10%;
+}
+
+.cartProductPlatform,
+.cartProductAmount {
+  width: 100%;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
+  background-color: rgba(28, 28, 28, 0.827);
+  padding: 0.5em 1em 0.5em 0.5em;
+  outline: none;
+}
+
+.cartProductSelect {
+  accent-color: rgb(0, 0, 255);
+}

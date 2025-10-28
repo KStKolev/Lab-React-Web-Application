@@ -1,4 +1,6 @@
+import useCart from "@/components/customHooks/useCart";
 import { ProductProps } from "@/interfaces/product";
+import { CartProductProps } from "@/interfaces/cartProduct";
 import RatingStars from "./ratingStars";
 import Platforms from "./platforms";
 import gameImages from "../../../assets/images/games/gameImages";
@@ -9,6 +11,19 @@ interface ProductCardProps {
 }
 
 export default function ProductCard(props: ProductCardProps) {
+  const { addToCart } = useCart();
+
+  function handleAddToCart() {
+    const cartProduct: CartProductProps = {
+      productName: props.product.title,
+      platforms: props.product.platforms,
+      orderDate: new Date().toLocaleDateString("en-US"),
+      amount: 1,
+      price: props.product.price,
+    };
+    addToCart(cartProduct);
+  }
+
   return (
     <div className={style.flipCard}>
       <div className={style.flipCardInner}>
@@ -24,7 +39,7 @@ export default function ProductCard(props: ProductCardProps) {
         <div className={style.flipCardBack}>
           <p className={style.productDescription}>{props.product.description}</p>
           <p className={style.productAge}>{props.product.age}</p>
-          <button className={style.addToCartButton} type="button">
+          <button className={style.addToCartButton} type="button" onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>

@@ -11,7 +11,7 @@ import Header from "./components/header/header";
 import Home from "./components/home/home";
 import Products from "./components/products/products";
 import Profile from "./components/profile/profile";
-import Cart from "./components/cart/Cart";
+import Cart from "./components/cart/cart";
 import About from "./components/about/about";
 import Footer from "./components/footer/footer";
 import ProtectedRoute from "./components/header/protectedRoute";

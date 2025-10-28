@@ -1,0 +1,25 @@
+.cartSummary {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 3em;
+
+  & > span {
+    font-size: 1.25rem;
+    color: rgb(192, 191, 191);
+  }
+
+  & > button {
+    padding: 1.1em 2em;
+  }
+}
+
+.cartTableButton {
+  font-size: 1rem;
+  font-weight: normal;
+  color: white;
+  background-color: rgba(75, 30, 96, 0.785);
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+}
