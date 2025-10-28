@@ -1,11 +1,13 @@
 import { useState, useCallback } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { useLoader } from "@/components/customHooks/useLoader";
-import { ProductProps } from "@/interfaces/product";
-import { allowedCategories } from "@/platforms";
+import { ProductProps } from "@/utils/interfaces/product";
+import { allowedCategories } from "@/utils/platforms";
+import useAuth from "../customHooks/useAuth";
 import ProductsAside from "./productsAside/productsAside";
 import ProductsContainer from "./productsContainer/productsContainer";
 import ProductInputSearch from "./productInputSearch";
+import ProductModal from "../modal/productModal";
 import Loader from "../loader";
 import apiEndpoints from "../../api.endpoints";
 import backgroundImage from "../../assets/images/background.jpg";
@@ -24,8 +26,13 @@ export default function Products() {
   const [filters, setFilters] = useState<Record<string, string>>(defaultFilters);
   const [timer, setTimer] = useState<number>(500);
   const [oldCategory, setCategory] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
+  const [selectedProduct, setSelectedProduct] = useState<ProductProps | undefined>(undefined);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const params = useParams<{ category: string }>();
   const { category } = params;
+  const { user } = useAuth();
 
   if (!category || !allowedCategories.includes(category.toLowerCase())) {
     return <Navigate to={routes.HOME} replace />;
@@ -47,21 +54,93 @@ export default function Products() {
     }
 
     return productsData;
-  }, [filters, category]);
+  }, [filters, category, refreshTrigger]);
 
   const { data: products, loading } = useLoader(fetchProducts, timer);
+
+  const handleOpenAddModal = () => {
+    setModalMode("add");
+    setSelectedProduct(undefined);
+    setIsModalOpen(true);
+  };
+
+  const handleOpenEditModal = (product: ProductProps) => {
+    setModalMode("edit");
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(undefined);
+  };
+
+  const handleSubmitProduct = async (product: Partial<ProductProps>) => {
+    if (modalMode === "add") {
+      await fetch(apiEndpoints.createProduct, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      });
+    } else {
+      await fetch(apiEndpoints.updateProduct, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      });
+    }
+
+    setRefreshTrigger((prev) => prev + 1);
+    handleCloseModal();
+  };
+
+  const handleDeleteProduct = async () => {
+    if (!selectedProduct?.id) {
+      return;
+    }
+
+    await fetch(apiEndpoints.deleteProduct(selectedProduct.id), {
+      method: "DELETE",
+    });
+
+    setRefreshTrigger((prev) => prev + 1);
+    handleCloseModal();
+  };
 
   return (
     <main className={style.productsMain} style={{ backgroundImage: `url(${backgroundImage})` }}>
       <ProductsAside category={category} filters={filters} setFilters={setFilters} />
+
       <section className={style.productsContent}>
-        <ProductInputSearch filters={filters} setFilters={setFilters} />
+        <div className={style.productsContentHeader}>
+          <ProductInputSearch filters={filters} setFilters={setFilters} />
+          {user?.authority === "admin" && (
+            <button type="button" className={style.addProductButton} onClick={handleOpenAddModal}>
+              Create Card
+            </button>
+          )}
+        </div>
+
         <section className={style.productsSection}>
           <h1 className={style.productsTitle}>Products</h1>
           <hr />
-          {loading ? <Loader /> : <ProductsContainer key={category} products={products || []} />}
+          {loading ? <Loader /> : <ProductsContainer key={category} products={products || []} onEdit={handleOpenEditModal} />}
         </section>
       </section>
+
+      {isModalOpen && (
+        <ProductModal
+          mode={modalMode}
+          product={selectedProduct}
+          onClose={handleCloseModal}
+          onSubmit={handleSubmitProduct}
+          onDelete={modalMode === "edit" ? handleDeleteProduct : undefined}
+        />
+      )}
     </main>
   );
 }

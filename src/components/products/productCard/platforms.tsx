@@ -1,4 +1,4 @@
-import { PlatformType } from "../../../platforms";
+import { PlatformType } from "../../../utils/platforms";
 import PCIcon from "../../../assets/images/platforms/pc.png";
 import PlayStationIcon from "../../../assets/images/platforms/ps.png";
 import XboxIcon from "../../../assets/images/platforms/xbox.png";

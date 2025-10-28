@@ -22,9 +22,35 @@
   width: 100%;
 }
 
+.productsContentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .productsSection {
   width: 100%;
   padding: 2em;
   border-radius: 3rem;
   background-color: rgba(0, 0, 0, 0.301);
+}
+
+.addProductButton {
+  font-size: 0.85rem;
+  color: white;
+  background-color: rgb(75, 30, 96);
+  border-radius: 0.5rem;
+  border: none;
+  padding: 1.3rem 1.4rem;
+  margin-top: 3em;
+  white-space: nowrap;
+  outline: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(91, 45, 121);
+  }
 }
