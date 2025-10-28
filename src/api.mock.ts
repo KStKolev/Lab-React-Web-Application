@@ -133,8 +133,8 @@ const productNames = [
 ];
 
 const mockUsers = [
-  { username: "test", password: "123456", profileDescription: "just a user", profilePicture: "" },
-  { username: "user", password: "green", profileDescription: "just another user", profilePicture: "" },
+  { username: "test", password: "123456", profileDescription: "just a user", profilePicture: "", authority: "user" },
+  { username: "user", password: "green", profileDescription: "just another user", profilePicture: "", authority: "admin" },
 ];
 
 export default webpackMockServer.add((app) => {
@@ -165,6 +165,7 @@ export default webpackMockServer.add((app) => {
       profileDescription: userExists.profileDescription,
       profilePicture: userExists.profilePicture,
       password: userExists.password,
+      authority: userExists.authority,
     };
 
     return res.status(200).json({ code: 200, user: loggedInUser });
@@ -179,7 +180,7 @@ export default webpackMockServer.add((app) => {
       return res.status(400).json({ code: 400, error: "Username already exists" });
     }
 
-    const newUser = { username, password, profileDescription: "", profilePicture: "" };
+    const newUser = { username, password, profileDescription: "", profilePicture: "", authority: "user" };
 
     mockUsers.push(newUser);
 
@@ -259,5 +260,53 @@ export default webpackMockServer.add((app) => {
     }
 
     res.json(results);
+  });
+
+  app.post(apiEndpoints.createProduct, (_req, res) => {
+    const newProduct = _req.body;
+
+    const newId = Math.max(...gamesMockData.map((g) => g.id), 0) + 1;
+    const productWithId = {
+      ...newProduct,
+      id: newId,
+      productAddDate: new Date().toISOString(),
+      rating: 0,
+    };
+
+    gamesMockData.push(productWithId);
+
+    return res.status(201).json({ code: 201, product: productWithId });
+  });
+
+  app.put(apiEndpoints.updateProduct, (_req, res) => {
+    const updatedProduct = _req.body;
+
+    const productIndex = gamesMockData.findIndex((g) => g.id === updatedProduct.id);
+
+    if (productIndex === -1) {
+      return res.status(404).json({ code: 404, error: "Product not found" });
+    }
+
+    gamesMockData[productIndex] = {
+      ...gamesMockData[productIndex],
+      ...updatedProduct,
+    };
+
+    return res.status(200).json({ code: 200, product: gamesMockData[productIndex] });
+  });
+
+  app.delete(apiEndpoints.deleteProduct(":id"), (_req, res) => {
+    const { id } = _req.params;
+    const productId = parseInt(id, 10);
+
+    const productIndex = gamesMockData.findIndex((g) => g.id === productId);
+
+    if (productIndex === -1) {
+      return res.status(404).json({ code: 404, error: "Product not found" });
+    }
+
+    const deletedProduct = gamesMockData.splice(productIndex, 1)[0];
+
+    return res.status(200).json({ code: 200, product: deletedProduct });
   });
 });
