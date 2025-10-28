@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputText from "../../elements/inputText";
+import Input from "../../elements/input";
 import signInIcon from "../../assets/images/icons/signInInput.svg";
 import apiEndPoints from "../../api.endpoints";
 import * as styles from "./auth.m.scss";
@@ -67,22 +67,62 @@ export default function SignIn(props: SignInProps) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <InputText
+      <Input
         label="Login"
         name="username"
         type="text"
         value={username}
         iconUrl={signInIcon}
         onChange={(e) => setUsername(e.target.value)}
+        customStyles={{
+          wrapper: { display: "flex", alignItems: "center" },
+          label: { flex: "0 0 250px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
+          inputField: {
+            fontSize: "1.1rem",
+            width: "100%",
+            color: "rgb(216, 216, 216)",
+            border: "2px solid rgb(216, 216, 216)",
+            backgroundColor: "rgba(0, 0, 0, 0.301)",
+            padding: "1em 2.8em 1em 1.3em",
+          },
+          icon: {
+            position: "absolute",
+            top: "50%",
+            right: "5%",
+            height: "20px",
+            width: "20px",
+            transform: "translateY(-50%)",
+          },
+        }}
         error={errors.username}
       />
-      <InputText
+      <Input
         label="Password"
         name="password"
         type="password"
         value={password}
         iconUrl={signInIcon}
         onChange={(e) => setPassword(e.target.value)}
+        customStyles={{
+          wrapper: { display: "flex", alignItems: "center" },
+          label: { flex: "0 0 250px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
+          inputField: {
+            fontSize: "1.1rem",
+            width: "100%",
+            color: "rgb(216, 216, 216)",
+            border: "2px solid rgb(216, 216, 216)",
+            backgroundColor: "rgba(0, 0, 0, 0.301)",
+            padding: "1em 2.8em 1em 1.3em",
+          },
+          icon: {
+            position: "absolute",
+            top: "50%",
+            right: "5%",
+            height: "20px",
+            width: "20px",
+            transform: "translateY(-50%)",
+          },
+        }}
         error={errors.password}
       />
       {errors.submitError && <span className={styles.errorMessage}>{errors.submitError}</span>}

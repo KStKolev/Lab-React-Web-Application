@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { isStrongPassword } from "../../validation";
-import InputText from "../../elements/inputText";
+import { isStrongPassword } from "../../utils/validation";
+import Input from "../../elements/input";
 import useAuth from "../customHooks/useAuth";
 import apiEndPoints from "../../api.endpoints";
 import passwordIcon from "../../assets/images/icons/padlock.svg";
@@ -74,24 +74,64 @@ export default function ChangePassword(props: ChangePasswordProps) {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div>
-        <InputText
-          label="Old Password"
-          name="oldPassword"
+        <Input
+          label="Password"
+          name="password"
           type="password"
           value={oldPassword}
           iconUrl={passwordIcon}
           onChange={(e) => setOldPassword(e.target.value)}
+          customStyles={{
+            wrapper: { display: "flex", alignItems: "center" },
+            label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
+            inputField: {
+              fontSize: "1.1rem",
+              width: "100%",
+              color: "rgb(216, 216, 216)",
+              border: "2px solid rgb(216, 216, 216)",
+              backgroundColor: "rgba(0, 0, 0, 0.301)",
+              padding: "1em 2.5em 1em 1.3em",
+            },
+            icon: {
+              position: "absolute",
+              top: "50%",
+              right: "5%",
+              height: "20px",
+              width: "20px",
+              transform: "translateY(-50%)",
+            },
+          }}
           error={errors.oldPassword}
         />
       </div>
       <div>
-        <InputText
-          label="New Password"
-          name="newPassword"
+        <Input
+          label="Repeat password"
+          name="repeatPassword"
           type="password"
           value={newPassword}
           iconUrl={passwordIcon}
           onChange={(e) => setNewPassword(e.target.value)}
+          customStyles={{
+            wrapper: { display: "flex", alignItems: "center" },
+            label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
+            inputField: {
+              fontSize: "1.1rem",
+              width: "100%",
+              color: "rgb(216, 216, 216)",
+              border: "2px solid rgb(216, 216, 216)",
+              backgroundColor: "rgba(0, 0, 0, 0.301)",
+              padding: "1em 2.5em 1em 1.3em",
+            },
+            icon: {
+              position: "absolute",
+              top: "50%",
+              right: "5%",
+              height: "20px",
+              width: "20px",
+              transform: "translateY(-50%)",
+            },
+          }}
           error={errors.newPassword}
         />
       </div>
