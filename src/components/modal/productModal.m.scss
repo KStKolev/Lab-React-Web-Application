@@ -1,0 +1,113 @@
+.productModalContainer {
+  display: flex;
+  gap: 3em;
+  color: rgb(217, 217, 217);
+  margin: 0 3em;
+}
+
+.productModalLeft,
+.productModalRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.productModalLeft {
+  flex: 0 0 280px;
+}
+
+.productModalRight {
+  flex: 1;
+}
+
+.sectionTitle {
+  font-size: 1.7rem;
+  font-weight: normal;
+  color: rgb(217, 217, 217);
+  margin: 0;
+}
+
+.imagePreview {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ageSelect {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+  font-size: 1.3rem;
+
+  & > span {
+    flex: 0 0 120px;
+  }
+}
+
+.select {
+  font-size: 1.1rem;
+  color: rgb(218, 218, 218);
+  background-color: rgba(0, 0, 0, 0.311);
+  border: 2px solid rgb(166, 166, 166);
+  outline: none;
+  padding: 0em 1em;
+}
+
+.platformCheckboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.2em;
+}
+
+.errorMessage {
+  font-size: 0.875rem;
+  color: red;
+  margin-top: 0.5em;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 1.3rem;
+}
+
+.checkbox {
+  width: 30px;
+  height: 30px;
+  accent-color: rgb(0, 64, 255);
+  cursor: pointer;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.button {
+  font-size: 1.3rem;
+  color: white;
+  border: none;
+  background-color: rgb(75, 30, 96);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  transition: opacity 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
