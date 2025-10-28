@@ -30,3 +30,21 @@ input[type="password"]::-ms-reveal {
   filter: brightness(0) invert(1);
   margin-left: 1em;
 }
+
+input {
+  outline: none;
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0.311) inset !important;
+    -webkit-text-fill-color: rgb(217, 217, 217) !important;
+    caret-color: rgb(217, 217, 217) !important;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+}
+
+textarea {
+  outline: none;
+}
