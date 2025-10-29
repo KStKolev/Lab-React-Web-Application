@@ -1,4 +1,4 @@
-import gameImages from "@/assets/images/games/gameImages";
+import gameImages from "@/constants/gameImages";
 
 export const getImageSrc = (imageUrl: string): string => {
   if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
