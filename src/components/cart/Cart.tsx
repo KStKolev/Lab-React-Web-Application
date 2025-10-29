@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import useCart from "../customHooks/useCart";
+import useCart from "@/customHooks/useCart";
+import backgroundImage from "@/assets/images/background.jpg";
 import CartProductRow from "./cartProductRow";
 import CartBalance from "./cartBalance";
-import backgroundImage from "../../assets/images/background.jpg";
 import * as styles from "./cart.m.scss";
 
 export default function Cart() {

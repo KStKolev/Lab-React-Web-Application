@@ -1,4 +1,4 @@
-import { PlatformType } from "../platforms";
+import { PlatformType } from "../constants/platforms";
 
 export interface ProductProps {
   id: number;
