@@ -1,8 +1,9 @@
-import useCart from "@/components/customHooks/useCart";
-import useAuth from "@/components/customHooks/useAuth";
-import { ProductProps } from "@/utils/interfaces/product";
-import { CartProductProps } from "@/utils/interfaces/cartProduct";
+import { memo } from "react";
+import useCart from "@/customHooks/useCart";
+import useAuth from "@/customHooks/useAuth";
 import { getImageSrc } from "@/utils/imageUtils";
+import { ProductProps } from "@/interfaces/product";
+import { CartProductProps } from "@/interfaces/cartProduct";
 import RatingStars from "./ratingStars";
 import Platforms from "./platforms";
 import * as style from "./productCard.m.scss";
@@ -12,7 +13,7 @@ interface ProductCardProps {
   onEdit: (product: ProductProps) => void;
 }
 
-export default function ProductCard(props: ProductCardProps) {
+function ProductCard(props: ProductCardProps) {
   const { addToCart } = useCart();
   const { user } = useAuth();
 
@@ -62,3 +63,5 @@ export default function ProductCard(props: ProductCardProps) {
     </div>
   );
 }
+
+export default memo(ProductCard);

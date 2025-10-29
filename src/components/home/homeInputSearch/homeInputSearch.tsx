@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, KeyboardEvent } from "react";
-import InputSearch from "../../../elements/inputSearch";
-import apiEndpoints from "../../../api.endpoints";
+import InputSearch from "@/elements/inputSearch";
+import apiEndpoints from "@/api.endpoints";
 
 export default function HomeInputSearch() {
   const [value, setValue] = useState("");
@@ -29,7 +29,7 @@ export default function HomeInputSearch() {
     setShowDropdown(data.length > 0);
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setFocusedIndex(-1);
 
@@ -38,7 +38,7 @@ export default function HomeInputSearch() {
     }
 
     debounceRef.current = setTimeout(() => performSearch(e.target.value), 300);
-  };
+  }, []);
 
   const handleItemClick = (item: string) => {
     alert(`Selected item: ${item}`);

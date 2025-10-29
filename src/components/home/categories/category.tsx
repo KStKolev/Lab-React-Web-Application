@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import routes from "@/routes";
 import * as style from "./category.m.scss";
@@ -8,7 +9,7 @@ interface CategoryProps {
   urlProperty: string;
 }
 
-export default function Category(props: CategoryProps) {
+function Category(props: CategoryProps) {
   const navigate = useNavigate();
 
   const categoryNavigate = () => {
@@ -22,3 +23,5 @@ export default function Category(props: CategoryProps) {
     </button>
   );
 }
+
+export default memo(Category);
