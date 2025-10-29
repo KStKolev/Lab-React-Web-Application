@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import { AUTH_USER } from "@/utils/localStorage";
+import { AUTH_USER } from "@/constants/localStorage";
 
 interface AuthState {
   user?: {
@@ -20,20 +20,14 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    signIn(state, action) {
-      state.user = action.payload;
-    },
-    signUp(state, action) {
+    setUser(state, action) {
       state.user = action.payload;
     },
     logout(state) {
       state.user = null;
     },
-    updateUser(state, action) {
-      state.user = action.payload;
-    },
   },
 });
 
-export const { signIn, signUp, logout, updateUser } = authSlice.actions;
+export const { setUser, logout } = authSlice.actions;
 export default authSlice.reducer;
