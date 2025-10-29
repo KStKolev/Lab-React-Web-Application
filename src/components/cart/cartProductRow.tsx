@@ -1,5 +1,5 @@
-import { CartProductProps } from "@/utils/interfaces/cartProduct";
-import useCart from "../customHooks/useCart";
+import { CartProductProps } from "@/interfaces/cartProduct";
+import useCart from "@/customHooks/useCart";
 import * as styles from "./cartProductRow.m.scss";
 
 interface CartProductRowProps extends CartProductProps {

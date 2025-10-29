@@ -1,7 +1,7 @@
+import rockstarGamesLogo from "@/assets/images/footer/rockstarGamesLogo.svg";
+import epicGamesLogo from "@/assets/images/footer/epicGamesLogo.svg";
+import riotGamesLogo from "@/assets/images/footer/riotGames.svg";
 import * as styles from "./footer.m.scss";
-import epicGamesLogo from "../../assets/images/footer/epicGamesLogo.svg";
-import riotGamesLogo from "../../assets/images/footer/riotGames.svg";
-import rockstarGamesLogo from "../../assets/images/footer/rockstarGamesLogo.svg";
 
 export default function Footer() {
   const year = new Date().getFullYear();

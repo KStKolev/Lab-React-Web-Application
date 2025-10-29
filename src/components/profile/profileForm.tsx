@@ -1,6 +1,6 @@
 import Input from "@/elements/input";
 import Textarea from "@/elements/textarea";
-import signInIcon from "../../assets/images/icons/signInInput.svg";
+import signInIcon from "@/assets/images/icons/signInInput.svg";
 import * as styles from "./profileForm.m.scss";
 
 interface ProfileFormProps {

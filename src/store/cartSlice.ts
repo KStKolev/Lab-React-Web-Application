@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CartProductProps } from "@/utils/interfaces/cartProduct";
-import { CART_ITEMS } from "@/utils/localStorage";
+import { CART_ITEMS } from "@/constants/localStorage";
+import { CartProductProps } from "@/interfaces/cartProduct";
 import { logout } from "./authSlice";
 
 const storedCart = localStorage.getItem(CART_ITEMS);

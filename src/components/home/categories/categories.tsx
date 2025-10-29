@@ -1,8 +1,8 @@
-import * as style from "./categories.m.scss";
+import pcImage from "@/assets/images/categories/computer.svg";
+import psImage from "@/assets/images/categories/playstation.svg";
+import xboxImage from "@/assets/images/categories/xbox.svg";
 import Category from "./category";
-import pcImage from "../../../assets/images/categories/computer.svg";
-import psImage from "../../../assets/images/categories/playstation.svg";
-import xboxImage from "../../../assets/images/categories/xbox.svg";
+import * as style from "./categories.m.scss";
 
 export default function Categories() {
   return (
