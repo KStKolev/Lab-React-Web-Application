@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { ModalStyleConfig } from "@/utils/modalStyles";
-import closeIcon from "../../assets/images/icons/close.svg";
+import { ModalStyleConfig } from "@/interfaces/modalStyles";
+import closeIcon from "@/assets/images/icons/close.svg";
 import modalRoot from "../../elementIds";
 import * as styles from "./modal.m.scss";
 

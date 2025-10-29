@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent } from "react";
-import { TextareaStyleConfig } from "@/utils/textareaStyles";
+import { TextareaStyleConfig } from "@/interfaces/textareaStyles";
 import * as styles from "./textarea.m.scss";
 
 interface TextareaProps {

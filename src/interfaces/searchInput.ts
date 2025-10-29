@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { InputStyleConfig } from "../inputStyles";
+import { InputStyleConfig } from "./inputStyles";
 
 export interface SearchInputProps {
   value: string;

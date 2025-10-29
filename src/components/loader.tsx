@@ -1,5 +1,5 @@
+import loadingIcon from "@/assets/images/loading.svg";
 import * as styles from "./loader.m.scss";
-import loadingIcon from "../assets/images/loading.svg";
 
 export default function Loader() {
   return (

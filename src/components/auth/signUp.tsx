@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../../elements/input";
-import idCardIcon from "../../assets/images/icons/idCard.svg";
-import padlockIcon from "../../assets/images/icons/padlock.svg";
-import apiEndpoints from "../../api.endpoints";
-import routes from "../../routes";
-import { isStrongPassword } from "../../utils/validation";
+import { isStrongPassword } from "@/utils/validationUtils";
+import Input from "@/elements/input";
+import routes from "@/routes";
+import apiEndpoints from "@/api.endpoints";
+import padlockIcon from "@/assets/images/icons/padlock.svg";
+import idCardIcon from "@/assets/images/icons/idCard.svg";
 import * as styles from "./auth.m.scss";
 
 interface SignUpErrors {

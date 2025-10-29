@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { ProductProps } from "@/utils/interfaces/product";
-import { ageOptions, platformOptions } from "@/utils/options";
+import { ProductProps } from "@/interfaces/product";
+import { PlatformType } from "@/constants/platforms";
+import { ageOptions, platformOptions } from "@/constants/options";
 import { getImageSrc } from "@/utils/imageUtils";
-import { PlatformType } from "@/utils/platforms";
-import useCart from "@/components/customHooks/useCart";
+import useCart from "@/customHooks/useCart";
 import Input from "@/elements/input";
 import Textarea from "@/elements/textarea";
 import FormGroup from "@/elements/formGroup";

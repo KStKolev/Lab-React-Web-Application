@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState, forwardRef, RefObject, KeyboardEvent, FocusEvent } from "react";
-import { isValidPrice } from "@/utils/validation";
-import { InputStyleConfig } from "@/utils/inputStyles";
+import { isValidPrice } from "@/utils/validationUtils";
+import { InputStyleConfig } from "@/interfaces/inputStyles";
 import * as styles from "./input.m.scss";
 
 interface InputProps {
@@ -61,7 +61,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     flex: props.customStyles?.label?.flex,
   };
 
-  const inputWrapperStyles: React.CSSProperties = {
+  const wrapperStyles: React.CSSProperties = {
     display: props.customStyles?.wrapper?.display,
     flexDirection: props.customStyles?.wrapper?.flexDirection as React.CSSProperties["flexDirection"],
     gap: props.customStyles?.wrapper?.gap,
@@ -69,7 +69,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     justifyContent: props.customStyles?.wrapper?.justifyContent,
   };
 
-  const inputFieldStyles: React.CSSProperties = {
+  const inputStyles: React.CSSProperties = {
     fontSize: props.customStyles?.inputField?.fontSize,
     width: props.customStyles?.inputField?.width,
     padding: props.customStyles?.inputField?.padding,
@@ -91,7 +91,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   };
 
   return (
-    <div style={inputWrapperStyles}>
+    <div style={wrapperStyles}>
       {props.label && (
         <label htmlFor={props.name} style={labelStyles}>
           {props.label}
@@ -108,7 +108,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             onChange={handleInputChange}
             onKeyDown={props.onKeyDown}
             onFocus={props.onFocus}
-            style={inputFieldStyles}
+            style={inputStyles}
             aria-invalid={!!props.error}
             aria-describedby={props.error ? `${props.name}-error` : undefined}
           />

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import apiEndpoints from "@/api.endpoints";
+import useAuth from "@/customHooks/useAuth";
+import backgroundImage from "@/assets/images/background.jpg";
 import ProfileForm from "./profileForm";
 import ProfilePicture from "./profilePicture";
 import Modal from "../modal/modal";
 import ChangePassword from "../auth/changePassword";
-import backgroundImage from "../../assets/images/background.jpg";
-import useAuth from "../customHooks/useAuth";
 import * as styles from "./profile.m.scss";
 
 interface ProfileErrors {

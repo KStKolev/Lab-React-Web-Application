@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import { SearchInputProps } from "@/utils/interfaces/searchInput";
+import { SearchInputProps } from "@/interfaces/searchInput";
+import loadingIcon from "@/assets/images/loading.svg";
 import Input from "./input";
-import loadingIcon from "../assets/images/loading.svg";
 import * as style from "./inputSearch.m.scss";
 
 const InputSearch = forwardRef<HTMLInputElement, SearchInputProps>((props, ref) => {

@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import routes from "../../routes";
+import useAuth from "@/customHooks/useAuth";
+import useCart from "@/customHooks/useCart";
+import routes from "@/routes";
+import userIcon from "@/assets/images/icons/user.png";
+import arrowDropDown from "@/assets/images/icons/arrowDrop.svg";
+import shoppingCartIcon from "@/assets/images/icons/shoppingCart.png";
+import logoutIcon from "@/assets/images/icons/logout.png";
 import Modal from "../modal/modal";
 import SignIn from "../auth/signIn";
 import SignUp from "../auth/signUp";
-import userIcon from "../../assets/images/icons/user.png";
-import arrowDropDown from "../../assets/images/icons/arrowDrop.svg";
-import shoppingCartIcon from "../../assets/images/icons/shoppingCart.png";
-import logoutIcon from "../../assets/images/icons/logout.png";
-import useAuth from "../customHooks/useAuth";
-import useCart from "../customHooks/useCart";
 import * as style from "./navbar.m.scss";
 
 export default function Navbar() {
