@@ -1,7 +1,7 @@
 import "./styles/main.scss";
 // watch: native intellisense and file-peek for aliases from jsconfig.json and with none-js files doesn't work: https://github.com/microsoft/TypeScript/issues/29334
 
-import { Component /* , StrictMode */ } from "react";
+import { Component, lazy, Suspense /* , StrictMode */ } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -9,17 +9,19 @@ import { store } from "./store/store";
 import apiEndpoints from "./api.endpoints";
 import Header from "./components/header/header";
 import Home from "./components/home/home";
-import Products from "./components/products/products";
-import Profile from "./components/profile/profile";
-import Cart from "./components/cart/cart";
-import About from "./components/about/about";
 import Footer from "./components/footer/footer";
 import ProtectedRoute from "./components/header/protectedRoute";
 import ErrorBoundary from "./components/errorHandler/errorBoundary";
 import ErrorPage from "./components/errorHandler/errorPage";
+import Loader from "./components/loader";
 import routes from "./routes";
-import TestComponent from "./components/testComponent";
 import ErrorRoutingPage from "./components/errorHandler/errorRoutingPage";
+
+const Products = lazy(() => import("./components/products/products"));
+const Profile = lazy(() => import("./components/profile/profile"));
+const Cart = lazy(() => import("./components/cart/cart"));
+const About = lazy(() => import("./components/about/about"));
+const TestComponent = lazy(() => import("./components/testComponent"));
 
 interface Props {}
 interface State {}
@@ -51,48 +53,50 @@ class AppContainer extends Component<Props, State> {
       <BrowserRouter>
         <Provider store={store}>
           <Header />
-          <Routes>
-            <Route path={routes.HOME} element={<Home />} errorElement={<ErrorRoutingPage />} />
-            <Route
-              path={routes.PRODUCTS}
-              element={
-                <ProtectedRoute>
-                  <Products />
-                </ProtectedRoute>
-              }
-              errorElement={<ErrorRoutingPage />}
-            />
-            <Route
-              path={routes.ABOUT}
-              element={
-                <ProtectedRoute>
-                  <About />
-                </ProtectedRoute>
-              }
-              errorElement={<ErrorRoutingPage />}
-            />
-            <Route
-              path={routes.PROFILE}
-              element={
-                <ProtectedRoute>
-                  <Profile />
-                </ProtectedRoute>
-              }
-              errorElement={<ErrorRoutingPage />}
-            />
-            <Route
-              path={routes.CART}
-              element={
-                <ProtectedRoute>
-                  <Cart />
-                </ProtectedRoute>
-              }
-              errorElement={<ErrorRoutingPage />}
-            />
-            <Route path="/test" element={<TestComponent />} errorElement={<ErrorRoutingPage />} />
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path={routes.HOME} element={<Home />} errorElement={<ErrorRoutingPage />} />
+              <Route
+                path={routes.PRODUCTS}
+                element={
+                  <ProtectedRoute>
+                    <Products />
+                  </ProtectedRoute>
+                }
+                errorElement={<ErrorRoutingPage />}
+              />
+              <Route
+                path={routes.ABOUT}
+                element={
+                  <ProtectedRoute>
+                    <About />
+                  </ProtectedRoute>
+                }
+                errorElement={<ErrorRoutingPage />}
+              />
+              <Route
+                path={routes.PROFILE}
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+                errorElement={<ErrorRoutingPage />}
+              />
+              <Route
+                path={routes.CART}
+                element={
+                  <ProtectedRoute>
+                    <Cart />
+                  </ProtectedRoute>
+                }
+                errorElement={<ErrorRoutingPage />}
+              />
+              <Route path="/test" element={<TestComponent />} errorElement={<ErrorRoutingPage />} />
 
-            <Route path={routes.CATCH} element={<Navigate to={routes.HOME} replace />} />
-          </Routes>
+              <Route path={routes.CATCH} element={<Navigate to={routes.HOME} replace />} />
+            </Routes>
+          </Suspense>
           <Footer />
         </Provider>
       </BrowserRouter>
