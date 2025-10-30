@@ -1,4 +1,4 @@
-import { CartProductProps } from "@/interfaces/cartProduct";
+import { CartProductProps } from "@/utils/interfaces/cartProduct";
 import useCart from "../customHooks/useCart";
 import * as styles from "./cartProductRow.m.scss";
 

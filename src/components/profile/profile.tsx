@@ -85,6 +85,7 @@ export default function Profile() {
         <hr />
         <div className={styles.profileContent}>
           <ProfilePicture profilePicture={profilePicture} onChange={setProfilePicture} />
+
           <ProfileForm
             username={username}
             profileDescription={profileDescription}
@@ -92,6 +93,7 @@ export default function Profile() {
             setUsername={setUsername}
             setProfileDescription={setProfileDescription}
           />
+
           <div className={styles.profileButtons}>
             <button type="button" className={styles.profileButton} onClick={handleSubmit}>
               Save profile
@@ -104,7 +106,17 @@ export default function Profile() {
       </section>
 
       {changePassword && (
-        <Modal modalTitle="Change Password" onClose={() => setChangePassword(false)}>
+        <Modal
+          modalTitle="Change Password"
+          onClose={() => setChangePassword(false)}
+          customStyles={{
+            overlay: {
+              backgroundColor: "rgb(76, 76, 76)",
+            },
+            wrapper: { width: "50%" },
+            title: { fontSize: "1.8rem" },
+          }}
+        >
           <ChangePassword onChangePasswordSuccess={() => setChangePassword(false)} />
         </Modal>
       )}

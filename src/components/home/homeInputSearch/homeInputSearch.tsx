@@ -112,6 +112,25 @@ export default function HomeInputSearch() {
       onItemClick={handleItemClick}
       loading={loading}
       placeholder="Search"
+      customStyles={{
+        inputField: {
+          fontSize: "1.2rem",
+          width: "100%",
+          color: "rgb(218, 218, 218)",
+          border: "2px solid rgb(166, 166, 166)",
+          backgroundColor: "rgba(0, 0, 0, 0.301)",
+          borderRadius: "1.5rem",
+          padding: "0.8em 1.3em",
+        },
+        icon: {
+          position: "absolute",
+          top: "50%",
+          right: "2%",
+          height: "40px",
+          width: "40px",
+          transform: "translateY(-50%)",
+        },
+      }}
     />
   );
 }

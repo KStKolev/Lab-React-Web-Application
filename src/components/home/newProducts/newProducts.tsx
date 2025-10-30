@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { ProductProps } from "@/interfaces/product";
+import { ProductProps } from "@/utils/interfaces/product";
 import ProductCard from "../../products/productCard/productCard";
+import ProductModal from "../../modal/productModal";
 import apiEndpoints from "../../../api.endpoints";
 import * as style from "./newProducts.m.scss";
 
 export default function NewProducts() {
   const [products, setProducts] = useState<ProductProps[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductProps | undefined>(undefined);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   useEffect(() => {
     const fetchTopProducts = async () => {
@@ -15,7 +19,43 @@ export default function NewProducts() {
     };
 
     fetchTopProducts();
-  }, []);
+  }, [refreshTrigger]);
+
+  const handleOpenEditModal = (product: ProductProps) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProduct(undefined);
+  };
+
+  const handleSubmitProduct = async (product: Partial<ProductProps>) => {
+    await fetch(apiEndpoints.updateProduct, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+
+    setRefreshTrigger((prev) => prev + 1);
+    handleCloseModal();
+  };
+
+  const handleDeleteProduct = async () => {
+    if (!selectedProduct?.id) {
+      return;
+    }
+
+    await fetch(apiEndpoints.deleteProduct(selectedProduct.id), {
+      method: "DELETE",
+    });
+
+    setRefreshTrigger((prev) => prev + 1);
+    handleCloseModal();
+  };
 
   return (
     <section className={style.newProductsSection}>
@@ -23,9 +63,18 @@ export default function NewProducts() {
       <hr />
       <div className={style.newProductsContainer}>
         {products.map((product) => {
-          return <ProductCard product={{ ...product }} key={product.id} />;
+          return <ProductCard product={{ ...product }} key={product.id} onEdit={handleOpenEditModal} />;
         })}
       </div>
+      {isModalOpen && (
+        <ProductModal
+          mode="edit"
+          product={selectedProduct}
+          onClose={handleCloseModal}
+          onSubmit={handleSubmitProduct}
+          onDelete={handleDeleteProduct}
+        />
+      )}
     </section>
   );
 }

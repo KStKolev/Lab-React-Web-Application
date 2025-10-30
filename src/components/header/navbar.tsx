@@ -56,6 +56,7 @@ export default function Navbar() {
             <span>Products</span>
             <img className={`${style.arrowDropdown} ${isOpen ? style.open : ""}`} src={arrowDropDown} alt="arrowDropDown" />
           </button>
+
           {isOpen && (
             <div className={style.dropdownContent}>
               <NavLink
@@ -65,6 +66,7 @@ export default function Navbar() {
               >
                 PC
               </NavLink>
+
               <NavLink
                 to={routes.PS}
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
@@ -72,6 +74,7 @@ export default function Navbar() {
               >
                 Playstation 5
               </NavLink>
+
               <NavLink
                 to={routes.XBOX}
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
@@ -82,6 +85,7 @@ export default function Navbar() {
             </div>
           )}
         </div>
+
         <NavLink
           to={routes.ABOUT}
           className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
@@ -89,16 +93,19 @@ export default function Navbar() {
         >
           About
         </NavLink>
+
         {user ? (
           <>
             <NavLink to={routes.PROFILE} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
               <img src={userIcon} className={style.userIcon} alt="User Icon" />
               {user.username}
             </NavLink>
+
             <NavLink to={routes.CART} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
               <img src={shoppingCartIcon} className={style.cartIcon} alt="Cart Icon" />
               <span className={style.cartItemCount}>{cartCount}</span>
             </NavLink>
+
             <li className={style.navButtonItem}>
               <button type="button" className={style.navButton} onClick={logout}>
                 <img src={logoutIcon} className={style.logoutIcon} alt="Logout Icon" />
@@ -122,7 +129,17 @@ export default function Navbar() {
       </ul>
 
       {showSignIn && (
-        <Modal onClose={() => setShowSignIn(false)} modalTitle="Authorization">
+        <Modal
+          onClose={() => setShowSignIn(false)}
+          modalTitle="Authorization"
+          customStyles={{
+            overlay: {
+              backgroundColor: "rgb(76, 76, 76)",
+            },
+            wrapper: { width: "50%" },
+            title: { fontSize: "1.8rem" },
+          }}
+        >
           <SignIn
             signIn={signIn}
             onSignInSuccess={() => {
@@ -137,7 +154,17 @@ export default function Navbar() {
       )}
 
       {showSignUp && (
-        <Modal onClose={() => setShowSignUp(false)} modalTitle="Registration">
+        <Modal
+          onClose={() => setShowSignUp(false)}
+          modalTitle="Registration"
+          customStyles={{
+            overlay: {
+              backgroundColor: "rgb(76, 76, 76)",
+            },
+            wrapper: { width: "50%" },
+            title: { fontSize: "1.8rem" },
+          }}
+        >
           <SignUp
             signUp={signUp}
             onSignUpSuccess={() => {

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { CART_ITEMS, AUTH_USER } from "@/localStorage";
+import { CART_ITEMS, AUTH_USER } from "@/utils/localStorage";
 import authReducer from "./authSlice";
 import cartReducer from "./cartSlice";
 

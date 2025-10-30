@@ -1,13 +1,16 @@
 import { ReactNode, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { ModalStyleConfig } from "@/utils/modalStyles";
 import closeIcon from "../../assets/images/icons/close.svg";
-import * as styles from "./modal.m.scss";
 import modalRoot from "../../elementIds";
+import * as styles from "./modal.m.scss";
 
 interface ModalProps {
   onClose: () => void;
   children: ReactNode;
   modalTitle?: string;
+  enableScroll?: boolean;
+  customStyles?: ModalStyleConfig;
 }
 
 export default function Modal(props: ModalProps) {
@@ -23,11 +26,26 @@ export default function Modal(props: ModalProps) {
     };
   }, []);
 
+  const overlayStyles: React.CSSProperties = {
+    backgroundColor: props.customStyles?.overlay?.backgroundColor,
+  };
+
+  const wrapperStyles: React.CSSProperties = {
+    width: props.customStyles?.wrapper?.width,
+  };
+
+  const modalTitleStyles: React.CSSProperties = {
+    fontSize: props.customStyles?.title?.fontSize,
+    margin: props.customStyles?.title?.margin,
+  };
+
   return ReactDOM.createPortal(
-    <section className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
+    <section className={styles.modalOverlay} style={overlayStyles}>
+      <div className={`${styles.modalContent} ${props.enableScroll ? styles.scrollable : ""}`} style={wrapperStyles}>
         <div className={styles.modalHeader}>
-          <h1 className={styles.modalTitle}>{props.modalTitle}</h1>
+          <h1 className={`${styles.modalTitle}`} style={modalTitleStyles}>
+            {props.modalTitle}
+          </h1>
           <button type="button" className={styles.closeButton} onClick={props.onClose}>
             <img className={styles.closeIcon} src={closeIcon} alt="closeIcon" draggable={false} />
           </button>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CartProductProps } from "@/interfaces/cartProduct";
-import { CART_ITEMS } from "@/localStorage";
+import { CartProductProps } from "@/utils/interfaces/cartProduct";
+import { CART_ITEMS } from "@/utils/localStorage";
 import { logout } from "./authSlice";
 
 const storedCart = localStorage.getItem(CART_ITEMS);
@@ -24,6 +24,15 @@ const cartSlice = createSlice({
         existingItem.amount = action.payload.amount;
       }
     },
+    updateProductInCart: (state, action) => {
+      const { oldTitle, newTitle, price, platforms } = action.payload;
+      const existingItem = state.find((item) => item.productName === oldTitle);
+      if (existingItem) {
+        existingItem.productName = newTitle;
+        existingItem.price = price;
+        existingItem.platforms = platforms;
+      }
+    },
     removeSelectedItems: (state, action) => {
       return state.filter((item) => !action.payload.includes(item.productName));
     },
@@ -35,5 +44,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, updateAmount, removeSelectedItems } = cartSlice.actions;
+export const { addToCart, updateAmount, updateProductInCart, removeSelectedItems } = cartSlice.actions;
 export default cartSlice.reducer;

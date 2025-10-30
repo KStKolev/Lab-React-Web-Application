@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InputText from "../../elements/inputText";
+import Input from "../../elements/input";
 import idCardIcon from "../../assets/images/icons/idCard.svg";
 import padlockIcon from "../../assets/images/icons/padlock.svg";
 import apiEndpoints from "../../api.endpoints";
 import routes from "../../routes";
-import { isStrongPassword } from "../../validation";
+import { isStrongPassword } from "../../utils/validation";
 import * as styles from "./auth.m.scss";
 
 interface SignUpErrors {
@@ -82,7 +82,7 @@ export default function SignUp(props: SignUpProps) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <InputText
+      <Input
         label="Login"
         name="username"
         type="text"
@@ -90,8 +90,28 @@ export default function SignUp(props: SignUpProps) {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         error={errors.username}
+        customStyles={{
+          wrapper: { display: "flex", alignItems: "center" },
+          label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
+          inputField: {
+            fontSize: "1.1rem",
+            width: "100%",
+            color: "rgb(216, 216, 216)",
+            border: "2px solid rgb(216, 216, 216)",
+            backgroundColor: "rgba(0, 0, 0, 0.301)",
+            padding: "1em 2.8em 1em 1.3em",
+          },
+          icon: {
+            position: "absolute",
+            top: "50%",
+            right: "5%",
+            height: "20px",
+            width: "20px",
+            transform: "translateY(-50%)",
+          },
+        }}
       />
-      <InputText
+      <Input
         label="Password"
         name="password"
         type="password"
@@ -99,8 +119,28 @@ export default function SignUp(props: SignUpProps) {
         iconUrl={padlockIcon}
         onChange={(e) => setPassword(e.target.value)}
         error={errors.password}
+        customStyles={{
+          wrapper: { display: "flex", alignItems: "center" },
+          label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
+          inputField: {
+            fontSize: "1.1rem",
+            width: "100%",
+            color: "rgb(216, 216, 216)",
+            border: "2px solid rgb(216, 216, 216)",
+            backgroundColor: "rgba(0, 0, 0, 0.301)",
+            padding: "1em 2.8em 1em 1.3em",
+          },
+          icon: {
+            position: "absolute",
+            top: "50%",
+            right: "5%",
+            height: "20px",
+            width: "20px",
+            transform: "translateY(-50%)",
+          },
+        }}
       />
-      <InputText
+      <Input
         label="Repeat Password"
         name="confirmPassword"
         type="password"
@@ -108,6 +148,26 @@ export default function SignUp(props: SignUpProps) {
         iconUrl={padlockIcon}
         onChange={(e) => setConfirmPassword(e.target.value)}
         error={errors.confirmPassword}
+        customStyles={{
+          wrapper: { display: "flex", alignItems: "center" },
+          label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
+          inputField: {
+            fontSize: "1.1rem",
+            width: "100%",
+            color: "rgb(216, 216, 216)",
+            border: "2px solid rgb(216, 216, 216)",
+            backgroundColor: "rgba(0, 0, 0, 0.301)",
+            padding: "1em 2.8em 1em 1.3em",
+          },
+          icon: {
+            position: "absolute",
+            top: "50%",
+            right: "5%",
+            height: "20px",
+            width: "20px",
+            transform: "translateY(-50%)",
+          },
+        }}
       />
       {errors.submitError && <span className={styles.errorMessage}>{errors.submitError}</span>}
       <button className={styles.submitButton} type="submit">

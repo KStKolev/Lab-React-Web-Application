@@ -45,14 +45,24 @@
   transform: rotateY(180deg);
 }
 
-.addToCartButton {
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.cardButton {
   font-size: 1.1rem;
   color: white;
   background-color: rgb(75, 30, 96);
   border-radius: 0.5rem;
   border: none;
   padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
   cursor: pointer;
+
+  &:hover {
+    background-color: rgb(91, 45, 121);
+  }
 }
 
 .productDescription {
