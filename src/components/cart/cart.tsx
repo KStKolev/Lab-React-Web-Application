@@ -6,10 +6,10 @@ import CartBalance from "./cartBalance";
 import * as styles from "./cart.m.scss";
 
 export default function Cart() {
-  const { cartItems, removeSelectedItems } = useCart();
   const [gamesCost, setGamesCost] = useState(0);
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [userBalance, setUserBalance] = useState(50.0);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const { cartItems, removeSelectedItems } = useCart();
 
   useEffect(() => {
     const totalCost = Math.round(cartItems.reduce((sum, { price, amount }) => sum + price * amount, 0) * 100) / 100;
@@ -45,6 +45,7 @@ export default function Cart() {
           <h1 className={styles.cartTitle}>Cart page</h1>
           <hr />
         </div>
+
         <div>
           <table className={styles.cartTable}>
             <thead className={styles.cartTableHead}>
@@ -56,6 +57,7 @@ export default function Cart() {
                 <th>Price ($)</th>
               </tr>
             </thead>
+
             <tbody className={styles.cartTableBody}>
               {cartItems.map((item) => (
                 <CartProductRow
@@ -68,6 +70,7 @@ export default function Cart() {
                   onCheckboxChange={handleCheckboxChange}
                 />
               ))}
+
               <tr>
                 <td colSpan={6} className={styles.cartTableRemoveRow}>
                   <button type="button" className={styles.cartTableButton} onClick={handleRemoveSelected}>
