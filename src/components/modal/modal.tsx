@@ -46,6 +46,7 @@ export default function Modal(props: ModalProps) {
           <h1 className={`${styles.modalTitle}`} style={modalTitleStyles}>
             {props.modalTitle}
           </h1>
+
           <button type="button" className={styles.closeButton} onClick={props.onClose}>
             <img className={styles.closeIcon} src={closeIcon} alt="closeIcon" draggable={false} />
           </button>

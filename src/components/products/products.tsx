@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { ProductProps } from "@/interfaces/product";
 import { allowedCategories } from "@/constants/platforms";
+import defaultProductFilters from "@/constants/productFilters";
 import { useLoader } from "@/customHooks/useLoader";
 import useAuth from "@/customHooks/useAuth";
 import routes from "@/routes";
@@ -14,16 +15,8 @@ import ProductModal from "../modal/productModal";
 import Loader from "../loader";
 import * as style from "./products.m.scss";
 
-const defaultFilters = {
-  sortType: "rating",
-  sortDir: "ascending",
-  genre: "all genres",
-  age: "all ages",
-  searchName: "",
-};
-
 export default function Products() {
-  const [filters, setFilters] = useState<Record<string, string>>(defaultFilters);
+  const [filters, setFilters] = useState<Record<string, string>>(defaultProductFilters);
   const [timer, setTimer] = useState<number>(500);
   const [oldCategory, setCategory] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +33,7 @@ export default function Products() {
 
   if (oldCategory !== category) {
     setCategory(category.toLowerCase());
-    setFilters(defaultFilters);
+    setFilters(defaultProductFilters);
     setTimer(500);
   }
 
@@ -118,6 +111,7 @@ export default function Products() {
       <section className={style.productsContent}>
         <div className={style.productsContentHeader}>
           <ProductInputSearch filters={filters} setFilters={setFilters} />
+
           {user?.authority === "admin" && (
             <button type="button" className={style.addProductButton} onClick={handleOpenAddModal}>
               Create Card
@@ -128,6 +122,7 @@ export default function Products() {
         <section className={style.productsSection}>
           <h1 className={style.productsTitle}>Products</h1>
           <hr />
+
           {loading ? <Loader /> : <ProductsContainer key={category} products={products || []} onEdit={handleOpenEditModal} />}
         </section>
       </section>

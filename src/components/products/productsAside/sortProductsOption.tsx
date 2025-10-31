@@ -17,6 +17,7 @@ export default function SortProductsOption(props: SortProductsProps) {
   return (
     <div className={styles.sortGroup}>
       <h4 className={styles.sortSubtitle}>{props.type}</h4>
+
       <select className={styles.sortSelect} value={props.filters[props.sortKey]} onChange={handleChange}>
         {props.values.map((value) => (
           <option key={`${value}-option`} value={value.toLowerCase()}>

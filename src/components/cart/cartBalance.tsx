@@ -11,6 +11,7 @@ export default function CartBalance(props: CartBalanceProps) {
     <div className={styles.cartSummary}>
       <span>Games cost: {props.gamesCost}$ </span>
       <span>Your balance: {props.userBalance}$</span>
+
       <button type="button" className={styles.cartTableButton} onClick={props.onBuy}>
         Buy
       </button>

@@ -21,6 +21,7 @@ export default function CartProductRow(props: CartProductRowProps) {
   return (
     <tr className={styles.cartProductRow}>
       <td>{props.productName}</td>
+
       <td>
         <select aria-label="Platform" className={styles.cartProductPlatform}>
           {props.platforms.map((platform) => (
@@ -28,7 +29,9 @@ export default function CartProductRow(props: CartProductRowProps) {
           ))}
         </select>
       </td>
+
       <td>{props.orderDate}</td>
+
       <td className={styles.cartProductAmountCell}>
         <input
           type="number"
@@ -40,7 +43,9 @@ export default function CartProductRow(props: CartProductRowProps) {
           onKeyDown={(e) => e.preventDefault()}
         />
       </td>
+
       <td>{props.price}</td>
+
       <td>
         <input type="checkbox" aria-label="Select row" className={styles.cartProductSelect} onChange={handleCheckboxChange} />
       </td>

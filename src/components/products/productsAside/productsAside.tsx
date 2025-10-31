@@ -1,3 +1,4 @@
+import { genreOptions, ageFilterOptions } from "@/constants/productOptions";
 import SortProducts from "./sortProducts";
 import FilterProducts from "./filterProducts";
 import * as style from "./productsAside.m.scss";
@@ -13,18 +14,21 @@ export default function ProductsAside(props: ProductsAsideProps) {
     <aside className={style.productsAside}>
       <h2 className={style.productsAsideTitle}>{props.category.toUpperCase()}</h2>
       <hr />
+
       <SortProducts filters={props.filters} setFilters={props.setFilters} />
+
       <FilterProducts
         filterTitle="Genres"
         filterType="genre"
-        values={["All genres", "Shooter", "Arcade", "Survive"]}
+        values={[...genreOptions]}
         filters={props.filters}
         setFilters={props.setFilters}
       />
+
       <FilterProducts
         filterTitle="Age"
         filterType="age"
-        values={["All ages", "3+", "6+", "12+", "18+"]}
+        values={[...ageFilterOptions]}
         filters={props.filters}
         setFilters={props.setFilters}
       />

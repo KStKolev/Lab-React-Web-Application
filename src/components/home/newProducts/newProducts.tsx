@@ -61,11 +61,13 @@ export default function NewProducts() {
     <section className={style.newProductsSection}>
       <h2 className={style.newProductsTitle}>New Games</h2>
       <hr />
+
       <div className={style.newProductsContainer}>
         {products.map((product) => {
           return <ProductCard product={product} key={product.id} onEdit={handleOpenEditModal} />;
         })}
       </div>
+
       {isModalOpen && (
         <ProductModal
           mode="edit"

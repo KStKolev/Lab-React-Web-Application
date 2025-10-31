@@ -23,6 +23,7 @@ function ProfilePicture(props: ProfilePictureProps) {
   return (
     <div className={profileImageStyles.profileImageContainer}>
       <img src={props.profilePicture || defaultProfilePicture} className={profileImageStyles.profileImage} alt="Profile" />
+
       <button
         type="button"
         className={profileStyles.profileButton}
@@ -32,6 +33,7 @@ function ProfilePicture(props: ProfilePictureProps) {
       >
         Change profile image
       </button>
+
       <input type="file" accept="image/*" id="profileImageInput" style={{ display: "none" }} onChange={handleImageChange} />
     </div>
   );

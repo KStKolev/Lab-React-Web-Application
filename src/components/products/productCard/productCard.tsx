@@ -1,9 +1,9 @@
 import { memo } from "react";
-import useCart from "@/customHooks/useCart";
-import useAuth from "@/customHooks/useAuth";
 import { getImageSrc } from "@/utils/imageUtils";
 import { ProductProps } from "@/interfaces/product";
 import { CartProductProps } from "@/interfaces/cartProduct";
+import useAuth from "@/customHooks/useAuth";
+import useCart from "@/customHooks/useCart";
 import RatingStars from "./ratingStars";
 import Platforms from "./platforms";
 import * as style from "./productCard.m.scss";
@@ -14,8 +14,8 @@ interface ProductCardProps {
 }
 
 function ProductCard(props: ProductCardProps) {
-  const { addToCart } = useCart();
   const { user } = useAuth();
+  const { addToCart } = useCart();
 
   function handleAddToCart() {
     const cartProduct: CartProductProps = {
@@ -38,20 +38,24 @@ function ProductCard(props: ProductCardProps) {
         <div className={style.flipCardFront}>
           <Platforms platforms={props.product.platforms} />
           <img className={style.productImage} src={getImageSrc(props.product.imageUrl)} alt={props.product.title} />
+
           <div className={style.spacer}>
             <h2 className={style.productTitle}>{props.product.title}</h2>
             <p className={style.productPrice}>{props.product.price}$</p>
           </div>
+
           <RatingStars rating={props.product.rating} />
         </div>
 
         <div className={style.flipCardBack}>
           <p className={style.productDescription}>{props.product.description}</p>
           <p className={style.productAge}>{props.product.age}</p>
+
           <div className={style.buttonContainer}>
             <button className={style.cardButton} type="button" onClick={handleAddToCart}>
               Add to Cart
             </button>
+
             {user?.authority === "admin" && (
               <button className={style.cardButton} type="button" onClick={handleEdit}>
                 Edit
