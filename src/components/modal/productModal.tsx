@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ProductProps } from "@/interfaces/product";
-import { PlatformType } from "@/constants/platforms";
-import { ageOptions, platformOptions } from "@/constants/options";
-import { getImageSrc } from "@/utils/imageUtils";
+import { ageOptions } from "@/constants/productOptions";
+import { productInputStyles, productTextareaStyles, productInputWithIconStyles } from "@/constants/productModalStyles";
 import useCart from "@/customHooks/useCart";
+import useProductValidation from "@/customHooks/useProductValidation";
+import useProductForm from "@/customHooks/useProductForm";
 import Input from "@/elements/input";
 import Textarea from "@/elements/textarea";
 import FormGroup from "@/elements/formGroup";
 import logIcon from "@/assets/images/icons/idCard.svg";
 import Modal from "./modal";
 import ConfirmModal from "./confirmModal";
+import ProductImagePreview from "./productImagePreview";
+import PlatformSelector from "./platformSelector";
 import * as styles from "./productModal.m.scss";
 
 interface ProductModalProps {
@@ -22,100 +25,12 @@ interface ProductModalProps {
 
 export default function ProductModal(props: ProductModalProps) {
   const { removeSelectedItems, updateProductInCart } = useCart();
-  const [formData, setFormData] = useState<Partial<ProductProps>>({
-    title: "",
-    genre: "",
-    price: 0,
-    imageUrl: "",
-    description: "",
-    age: "3+",
-    platforms: [],
-  });
-  const [originalTitle, setOriginalTitle] = useState<string>("");
+  const { formData, originalTitle, handleInputChange, handlePlatformChange } = useProductForm(props.product);
+  const { errors, validateForm } = useProductValidation();
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    if (props.product) {
-      setFormData(props.product);
-      setOriginalTitle(props.product.title);
-    }
-  }, [props.product]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    if (name === "price") {
-      const normalizedValue = value.replace(",", ".");
-      setFormData((prev) => ({
-        ...prev,
-        price: parseFloat(normalizedValue),
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
-
-  const handlePlatformChange = (platform: PlatformType) => {
-    setFormData((prev) => {
-      const platforms = prev.platforms || [];
-      const isSelected = platforms.includes(platform);
-      return {
-        ...prev,
-        platforms: isSelected ? platforms.filter((p) => p !== platform) : [...platforms, platform],
-      };
-    });
-  };
-
-  const formatPlatformLabel = (p: PlatformType): string => {
-    switch (p) {
-      case "PS":
-        return "PlayStation 5";
-      case "Xbox":
-        return "XBox One";
-      default:
-        return p;
-    }
-  };
-
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.title?.trim()) {
-      newErrors.title = "Name is required";
-    }
-
-    if (!formData.genre?.trim()) {
-      newErrors.genre = "Category is required";
-    }
-
-    if (!formData.price || formData.price <= 0) {
-      newErrors.price = "Price must be greater than 0";
-    }
-
-    if (!formData.imageUrl?.trim()) {
-      newErrors.imageUrl = "Image URL is required";
-    }
-
-    if (!formData.description?.trim()) {
-      newErrors.description = "Description is required";
-    }
-
-    if (!formData.platforms || formData.platforms.length === 0) {
-      newErrors.platforms = "At least one platform must be selected";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
   const handleSubmit = () => {
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm(formData)) return;
 
     if (props.mode === "edit") {
       updateProductInCart({
@@ -130,20 +45,12 @@ export default function ProductModal(props: ProductModalProps) {
     props.onClose();
   };
 
-  const handleDeleteClick = () => {
-    setShowConfirmDelete(true);
-  };
-
   const handleConfirmDelete = () => {
     if (props.onDelete && formData.title) {
       removeSelectedItems([formData.title]);
       props.onDelete();
       props.onClose();
     }
-  };
-
-  const handleCancelDelete = () => {
-    setShowConfirmDelete(false);
   };
 
   return (
@@ -159,14 +66,7 @@ export default function ProductModal(props: ProductModalProps) {
         }}
       >
         <div className={styles.productModalContainer}>
-          {props.mode === "edit" && (
-            <div className={styles.productModalLeft}>
-              <h3 className={styles.sectionTitle}>Card image</h3>
-              <div className={styles.imagePreview}>
-                {formData.imageUrl && <img src={getImageSrc(formData.imageUrl)} alt="Product preview" className={styles.previewImage} />}
-              </div>
-            </div>
-          )}
+          {props.mode === "edit" && <ProductImagePreview imageUrl={formData.imageUrl} />}
 
           <div className={styles.productModalRight}>
             <h3 className={styles.sectionTitle}>Information</h3>
@@ -179,26 +79,7 @@ export default function ProductModal(props: ProductModalProps) {
                 value={formData.title}
                 onChange={handleInputChange}
                 iconUrl={logIcon}
-                customStyles={{
-                  wrapper: { display: "flex", alignItems: "center" },
-                  label: { flex: "0 0 130px", fontSize: "1.3rem" },
-                  inputField: {
-                    fontSize: "1.1rem",
-                    width: "100%",
-                    color: "rgb(218, 218, 218)",
-                    border: "2px solid rgb(166, 166, 166)",
-                    backgroundColor: "rgba(0, 0, 0, 0.301)",
-                    padding: "0.9em 1.3em 0.9em 1em",
-                  },
-                  icon: {
-                    position: "absolute",
-                    top: "50%",
-                    right: "5%",
-                    height: "20px",
-                    width: "20px",
-                    transform: "translateY(-50%)",
-                  },
-                }}
+                customStyles={productInputWithIconStyles}
                 error={errors.title}
               />
             </FormGroup>
@@ -210,18 +91,7 @@ export default function ProductModal(props: ProductModalProps) {
                 name="genre"
                 value={formData.genre}
                 onChange={handleInputChange}
-                customStyles={{
-                  wrapper: { display: "flex", alignItems: "center" },
-                  label: { flex: "0 0 130px", fontSize: "1.3rem" },
-                  inputField: {
-                    fontSize: "1.1rem",
-                    width: "100%",
-                    color: "rgb(218, 218, 218)",
-                    border: "2px solid rgb(166, 166, 166)",
-                    backgroundColor: "rgba(0, 0, 0, 0.301)",
-                    padding: "0.9em 1.3em 0.9em 1em",
-                  },
-                }}
+                customStyles={productInputStyles}
                 error={errors.genre}
               />
             </FormGroup>
@@ -233,18 +103,7 @@ export default function ProductModal(props: ProductModalProps) {
                 name="price"
                 value={formData.price?.toString()}
                 onChange={handleInputChange}
-                customStyles={{
-                  wrapper: { display: "flex", alignItems: "center" },
-                  label: { flex: "0 0 130px", fontSize: "1.3rem" },
-                  inputField: {
-                    fontSize: "1.1rem",
-                    width: "100%",
-                    color: "rgb(218, 218, 218)",
-                    border: "2px solid rgb(166, 166, 166)",
-                    backgroundColor: "rgba(0, 0, 0, 0.301)",
-                    padding: "0.9em 1.3em 0.9em 1em",
-                  },
-                }}
+                customStyles={productInputStyles}
                 error={errors.price}
               />
             </FormGroup>
@@ -256,18 +115,7 @@ export default function ProductModal(props: ProductModalProps) {
                 name="imageUrl"
                 value={formData.imageUrl}
                 onChange={handleInputChange}
-                customStyles={{
-                  wrapper: { display: "flex", alignItems: "center" },
-                  label: { flex: "0 0 130px", fontSize: "1.3rem" },
-                  inputField: {
-                    fontSize: "1.1rem",
-                    width: "100%",
-                    color: "rgb(218, 218, 218)",
-                    border: "2px solid rgb(166, 166, 166)",
-                    backgroundColor: "rgba(0, 0, 0, 0.301)",
-                    padding: "0.9em 1.3em 0.9em 1em",
-                  },
-                }}
+                customStyles={productInputStyles}
                 error={errors.imageUrl}
               />
             </FormGroup>
@@ -278,20 +126,7 @@ export default function ProductModal(props: ProductModalProps) {
                 name="description"
                 value={formData.description || ""}
                 onChange={handleInputChange}
-                customStyles={{
-                  wrapper: { display: "flex", alignItems: "center" },
-                  label: { flex: "0 0 130px", fontSize: "1.3rem" },
-                  textarea: {
-                    fontSize: "1.1rem",
-                    width: "100%",
-                    minHeight: "350px",
-                    maxHeight: "600px",
-                    color: "rgb(218, 218, 218)",
-                    border: "2px solid rgb(166, 166, 166)",
-                    backgroundColor: "rgba(0, 0, 0, 0.301)",
-                    padding: "0.9em 1.3em 0.9em 1em",
-                  },
-                }}
+                customStyles={productTextareaStyles}
                 error={errors.description}
               />
             </FormGroup>
@@ -299,6 +134,7 @@ export default function ProductModal(props: ProductModalProps) {
             <FormGroup>
               <div className={styles.ageSelect}>
                 <span>Age</span>
+
                 <select name="age" value={formData.age} onChange={handleInputChange} className={styles.select}>
                   {ageOptions.map((ageOption) => (
                     <option key={ageOption} value={ageOption}>
@@ -309,24 +145,7 @@ export default function ProductModal(props: ProductModalProps) {
               </div>
             </FormGroup>
 
-            <FormGroup>
-              <div className={styles.platformCheckboxes}>
-                <span className={styles.sectionTitle}>Platform</span>
-                {platformOptions.map((platform) => (
-                  <label htmlFor={`platform-${platform}`} key={platform} className={styles.checkboxLabel}>
-                    {formatPlatformLabel(platform)}
-                    <input
-                      type="checkbox"
-                      name={`platform-${platform}`}
-                      checked={formData.platforms?.includes(platform) || false}
-                      onChange={() => handlePlatformChange(platform)}
-                      className={styles.checkbox}
-                    />
-                  </label>
-                ))}
-              </div>
-              {errors.platforms && <span className={styles.errorMessage}>{errors.platforms}</span>}
-            </FormGroup>
+            <PlatformSelector selectedPlatforms={formData.platforms} onPlatformChange={handlePlatformChange} error={errors.platforms} />
           </div>
         </div>
 
@@ -334,8 +153,9 @@ export default function ProductModal(props: ProductModalProps) {
           <button type="button" onClick={handleSubmit} className={styles.button}>
             Submit
           </button>
+
           {props.mode === "edit" && (
-            <button type="button" onClick={handleDeleteClick} className={styles.button}>
+            <button type="button" onClick={() => setShowConfirmDelete(true)} className={styles.button}>
               Delete card
             </button>
           )}
@@ -343,7 +163,7 @@ export default function ProductModal(props: ProductModalProps) {
       </Modal>
 
       {showConfirmDelete && (
-        <ConfirmModal productName={`${formData.title}`} onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} />
+        <ConfirmModal productName={`${formData.title}`} onConfirm={handleConfirmDelete} onCancel={() => setShowConfirmDelete(false)} />
       )}
     </>
   );
