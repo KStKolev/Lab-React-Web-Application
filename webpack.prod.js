@@ -3,6 +3,7 @@ const { merge } = require("webpack-merge");
 const CompressionPlugin = require("compression-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const common = require("./webpack.common");
 
 module.exports = (env, argv) => {
@@ -55,6 +56,11 @@ module.exports = (env, argv) => {
         algorithm: "brotliCompress",
         filename: "[path][base].br[query]",
         threshold: common.filesThreshold, // (bytes). Only assets bigger than this size are processed
+      }),
+      // Webpack Bundle Analyzer - generates interactive treemap of bundle contents
+      new BundleAnalyzerPlugin({
+        analyzerMode: env?.analyze ? "server" : "disabled", // only run when --env analyze is passed
+        openAnalyzer: true,
       }),
     ],
   };
