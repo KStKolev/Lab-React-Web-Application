@@ -53,6 +53,7 @@ export default function Navbar() {
         <NavLink to={routes.HOME} className={({ isActive }) => getNavLinkClass(isActive)}>
           Home
         </NavLink>
+
         <div className={style.dropdownWrapper} ref={dropdownRef}>
           <button type="button" className={`${style.dropdown} ${style.navItem}`} aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
             <span>Products</span>

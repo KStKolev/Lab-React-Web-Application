@@ -71,6 +71,7 @@ export default function Textarea(props: TextareaProps) {
           aria-describedby={props.error ? `${props.name}-error` : undefined}
         />
       </div>
+
       {props.error && <span className={styles.errorMessage}>{props.error}</span>}
     </>
   );

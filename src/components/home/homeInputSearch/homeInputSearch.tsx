@@ -47,7 +47,9 @@ export default function HomeInputSearch() {
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (!showDropdown) return;
+    if (!showDropdown) {
+      return;
+    }
 
     switch (event.key) {
       case "ArrowDown":
@@ -84,9 +86,11 @@ export default function HomeInputSearch() {
         setFocusedIndex(-1);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
   return (
     <InputSearch
       ref={inputRef}
