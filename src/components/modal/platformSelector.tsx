@@ -1,6 +1,6 @@
 import { PlatformType, platformOptions } from "@/constants/platforms";
 import FormGroup from "@/elements/formGroup";
-import * as styles from "./productModal.m.scss";
+import * as styles from "./platformSelector.m.scss";
 
 interface PlatformSelectorProps {
   selectedPlatforms?: PlatformType[];

@@ -1,5 +1,5 @@
 import { getImageSrc } from "@/utils/imageUtils";
-import * as styles from "./productModal.m.scss";
+import * as styles from "./productImagePreview.m.scss";
 
 interface ProductImagePreviewProps {
   imageUrl?: string;

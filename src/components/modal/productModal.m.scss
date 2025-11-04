@@ -5,19 +5,11 @@
   margin: 0 3em;
 }
 
-.productModalLeft,
 .productModalRight {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 1.5em;
-}
-
-.productModalLeft {
-  flex: 0 0 280px;
-}
-
-.productModalRight {
-  flex: 1;
 }
 
 .sectionTitle {
@@ -25,21 +17,6 @@
   font-weight: normal;
   color: rgb(217, 217, 217);
   margin: 0;
-}
-
-.imagePreview {
-  width: 100%;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.previewImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .ageSelect {
@@ -63,32 +40,10 @@
   padding: 0em 1em;
 }
 
-.platformCheckboxes {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 1.2em;
-}
-
 .errorMessage {
   font-size: 0.875rem;
   color: red;
   margin-top: 0.5em;
-}
-
-.checkboxLabel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  font-size: 1.3rem;
-}
-
-.checkbox {
-  width: 30px;
-  height: 30px;
-  accent-color: rgb(0, 64, 255);
-  cursor: pointer;
 }
 
 .buttonGroup {
