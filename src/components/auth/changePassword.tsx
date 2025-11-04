@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { isStrongPassword } from "../../utils/validation";
-import Input from "../../elements/input";
-import useAuth from "../customHooks/useAuth";
-import apiEndPoints from "../../api.endpoints";
-import passwordIcon from "../../assets/images/icons/padlock.svg";
+import { isStrongPassword } from "@/utils/validationUtils";
+import useAuth from "@/customHooks/useAuth";
+import Input from "@/elements/input";
+import apiEndPoints from "@/api.endpoints";
+import passwordIcon from "@/assets/images/icons/padlock.svg";
 import * as styles from "./auth.m.scss";
 
 interface ChangePasswordErrors {

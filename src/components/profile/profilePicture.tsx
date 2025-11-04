@@ -1,4 +1,5 @@
-import defaultProfilePicture from "../../assets/images/noPhoto.jpg";
+import { memo } from "react";
+import defaultProfilePicture from "@/assets/images/noPhoto.jpg";
 import * as profileImageStyles from "./profilePicture.m.scss";
 import * as profileStyles from "./profile.m.scss";
 
@@ -7,7 +8,7 @@ interface ProfilePictureProps {
   onChange: (newPicture: string) => void;
 }
 
-export default function ProfilePicture(props: ProfilePictureProps) {
+function ProfilePicture(props: ProfilePictureProps) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -35,3 +36,5 @@ export default function ProfilePicture(props: ProfilePictureProps) {
     </div>
   );
 }
+
+export default memo(ProfilePicture);

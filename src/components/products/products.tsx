@@ -1,17 +1,17 @@
 import { useState, useCallback } from "react";
 import { useParams, Navigate } from "react-router-dom";
-import { useLoader } from "@/components/customHooks/useLoader";
-import { ProductProps } from "@/utils/interfaces/product";
-import { allowedCategories } from "@/utils/platforms";
-import useAuth from "../customHooks/useAuth";
+import { ProductProps } from "@/interfaces/product";
+import { allowedCategories } from "@/constants/platforms";
+import { useLoader } from "@/customHooks/useLoader";
+import useAuth from "@/customHooks/useAuth";
+import routes from "@/routes";
+import apiEndpoints from "@/api.endpoints";
+import backgroundImage from "@/assets/images/background.jpg";
 import ProductsAside from "./productsAside/productsAside";
 import ProductsContainer from "./productsContainer/productsContainer";
 import ProductInputSearch from "./productInputSearch";
 import ProductModal from "../modal/productModal";
 import Loader from "../loader";
-import apiEndpoints from "../../api.endpoints";
-import backgroundImage from "../../assets/images/background.jpg";
-import routes from "../../routes";
 import * as style from "./products.m.scss";
 
 const defaultFilters = {
@@ -64,11 +64,11 @@ export default function Products() {
     setIsModalOpen(true);
   };
 
-  const handleOpenEditModal = (product: ProductProps) => {
+  const handleOpenEditModal = useCallback((product: ProductProps) => {
     setModalMode("edit");
     setSelectedProduct(product);
     setIsModalOpen(true);
-  };
+  }, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);

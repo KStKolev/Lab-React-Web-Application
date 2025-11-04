@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { ProductProps } from "@/utils/interfaces/product";
+import { useCallback, useEffect, useState } from "react";
+import { ProductProps } from "@/interfaces/product";
+import apiEndpoints from "@/api.endpoints";
 import ProductCard from "../../products/productCard/productCard";
 import ProductModal from "../../modal/productModal";
-import apiEndpoints from "../../../api.endpoints";
 import * as style from "./newProducts.m.scss";
 
 export default function NewProducts() {
@@ -21,10 +21,10 @@ export default function NewProducts() {
     fetchTopProducts();
   }, [refreshTrigger]);
 
-  const handleOpenEditModal = (product: ProductProps) => {
+  const handleOpenEditModal = useCallback((product: ProductProps) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
-  };
+  }, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -63,7 +63,7 @@ export default function NewProducts() {
       <hr />
       <div className={style.newProductsContainer}>
         {products.map((product) => {
-          return <ProductCard product={{ ...product }} key={product.id} onEdit={handleOpenEditModal} />;
+          return <ProductCard product={product} key={product.id} onEdit={handleOpenEditModal} />;
         })}
       </div>
       {isModalOpen && (

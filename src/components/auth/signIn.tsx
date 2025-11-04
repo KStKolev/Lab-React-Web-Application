@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Input from "../../elements/input";
-import signInIcon from "../../assets/images/icons/signInInput.svg";
-import apiEndPoints from "../../api.endpoints";
+import Input from "@/elements/input";
+import apiEndPoints from "@/api.endpoints";
+import signInIcon from "@/assets/images/icons/signInInput.svg";
 import * as styles from "./auth.m.scss";
 
 interface SignInErrors {
