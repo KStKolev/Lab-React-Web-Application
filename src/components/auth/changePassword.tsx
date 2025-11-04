@@ -72,6 +72,7 @@ export default function ChangePassword(props: ChangePasswordProps) {
       />
 
       {errors.submitError && <span className={styles.errorMessage}>{errors.submitError}</span>}
+
       <button type="submit" className={styles.submitButton}>
         Submit
       </button>

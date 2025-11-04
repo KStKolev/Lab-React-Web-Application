@@ -5,6 +5,7 @@ import { Component, lazy, Suspense /* , StrictMode */ } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import routes from "@/constants/routes";
 import { store } from "./redux/store";
 import apiEndpoints from "./api.endpoints";
 import Header from "./components/header/header";
@@ -14,7 +15,6 @@ import ProtectedRoute from "./components/header/protectedRoute";
 import ErrorBoundary from "./components/errorHandler/errorBoundary";
 import ErrorPage from "./components/errorHandler/errorPage";
 import Loader from "./components/loader";
-import routes from "./routes";
 import ErrorRoutingPage from "./components/errorHandler/errorRoutingPage";
 
 const Products = lazy(() => import("./components/products/products"));

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState, forwardRef, RefObject, KeyboardEvent, FocusEvent } from "react";
+import { ChangeEvent, useEffect, useState, forwardRef, KeyboardEvent, FocusEvent } from "react";
 import { isValidPrice } from "@/utils/validationUtils";
 import { InputStyleConfig } from "@/interfaces/inputStyles";
 import * as styles from "./input.m.scss";
@@ -12,7 +12,6 @@ interface InputProps {
   error?: string;
   placeholder?: string;
   customStyles?: InputStyleConfig;
-  inputRef?: RefObject<HTMLInputElement | null>;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: (e: FocusEvent<HTMLInputElement>) => void;
@@ -100,7 +99,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       <div className={styles.inputContainer}>
         <div className={styles.iconWrapper}>
           <input
-            ref={ref || props.inputRef}
+            ref={ref}
             type={props.type}
             name={props.name}
             value={internalValue}

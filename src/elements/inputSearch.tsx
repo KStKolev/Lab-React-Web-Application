@@ -16,7 +16,6 @@ const InputSearch = forwardRef<HTMLInputElement, SearchInputProps>((props, ref) 
         onChange={props.onChange}
         onKeyDown={props.onKeyDown}
         onFocus={props.onFocus}
-        inputRef={props.inputRef}
         iconUrl={props.loading ? loadingIcon : undefined}
         customStyles={props.customStyles}
       />

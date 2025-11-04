@@ -81,6 +81,7 @@ export default function Cart() {
             </tbody>
           </table>
         </div>
+
         <CartBalance gamesCost={gamesCost} userBalance={userBalance} onBuy={handleBuy} />
       </section>
     </main>

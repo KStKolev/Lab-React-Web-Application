@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "@/customHooks/useAuth";
 import useCart from "@/customHooks/useCart";
-import routes from "@/routes";
+import routes from "@/constants/routes";
 import authModalStyles from "@/constants/navbarStyles";
 import userIcon from "@/assets/images/icons/user.png";
 import arrowDropDown from "@/assets/images/icons/arrowDrop.svg";
@@ -19,9 +19,9 @@ export default function Navbar() {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [pendingNav, setPendingNav] = useState<string | null>(null);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const { cartCount } = useCart();
   const { user, signIn, signUp, logout } = useAuth();
+  const { cartCount } = useCart();
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const getNavLinkClass = (isActive: boolean) => `${style.navItem} ${isActive ? style.active : ""}`;
 
   useEffect(() => {

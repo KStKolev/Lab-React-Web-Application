@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import routes from "@/routes";
+import routes from "@/constants/routes";
 import * as style from "./category.m.scss";
 
 interface CategoryProps {

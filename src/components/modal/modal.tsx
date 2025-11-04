@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { ModalStyleConfig } from "@/interfaces/modalStyles";
 import closeIcon from "@/assets/images/icons/close.svg";
-import modalRoot from "../../elementIds";
+import elementIds from "@/constants/elementIds";
 import * as styles from "./modal.m.scss";
 
 interface ModalProps {
@@ -14,7 +14,7 @@ interface ModalProps {
 }
 
 export default function Modal(props: ModalProps) {
-  const root = document.getElementById(modalRoot.modalRoot);
+  const root = document.getElementById(elementIds.modalRoot);
   if (!root) {
     return null;
   }

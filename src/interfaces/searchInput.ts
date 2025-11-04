@@ -8,7 +8,6 @@ export interface SearchInputProps {
   showDropdown?: boolean;
   focusedIndex?: number;
   loading?: boolean;
-  inputRef?: RefObject<HTMLInputElement | null>;
   dropdownRef?: RefObject<HTMLDivElement | null>;
   customStyles?: InputStyleConfig;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -3,7 +3,7 @@ import type { TypedUseSelectorHook } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "@/redux/store";
 import { setUser, logout } from "@/redux/authSlice";
-import routes from "@/routes";
+import routes from "@/constants/routes";
 
 export default function useAuth() {
   const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

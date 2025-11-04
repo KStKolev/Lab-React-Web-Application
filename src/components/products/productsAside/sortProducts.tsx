@@ -1,6 +1,6 @@
 import { sortCriteriaOptions, sortDirectionOptions } from "@/constants/productOptions";
-import * as styles from "./sortProducts.m.scss";
 import SortProductsOption from "./sortProductsOption";
+import * as styles from "./sortProducts.m.scss";
 
 interface SortProductsProps {
   filters: Record<string, string>;

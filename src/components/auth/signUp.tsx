@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signUpInputStyles } from "@/constants/authInputStyles";
 import { useSignUpValidation } from "@/customHooks/useAuthValidation";
 import Input from "@/elements/input";
-import routes from "@/routes";
+import routes from "@/constants/routes";
 import apiEndpoints from "@/api.endpoints";
 import padlockIcon from "@/assets/images/icons/padlock.svg";
 import idCardIcon from "@/assets/images/icons/idCard.svg";
@@ -89,6 +89,7 @@ export default function SignUp(props: SignUpProps) {
       />
 
       {errors.submitError && <span className={styles.errorMessage}>{errors.submitError}</span>}
+
       <button className={styles.submitButton} type="submit">
         Submit
       </button>

@@ -101,7 +101,7 @@ export default function HomeInputSearch() {
 
   return (
     <InputSearch
-      inputRef={inputRef}
+      ref={inputRef}
       dropdownRef={dropdownRef}
       value={value}
       onChange={handleInputChange}
