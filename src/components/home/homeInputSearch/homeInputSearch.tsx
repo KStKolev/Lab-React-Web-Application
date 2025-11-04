@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, KeyboardEvent } from "react";
+import { useState, useEffect, useRef, useCallback, KeyboardEvent, ChangeEvent } from "react";
 import { homeSearchInputStyles } from "@/constants/searchInputStyles";
 import InputSearch from "@/elements/inputSearch";
 import apiEndpoints from "@/api.endpoints";
@@ -11,7 +11,6 @@ export default function HomeInputSearch() {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   const performSearch = useCallback(async (query: string) => {
     setFocusedIndex(-1);
@@ -30,16 +29,14 @@ export default function HomeInputSearch() {
     setShowDropdown(data.length > 0);
   }, []);
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    setFocusedIndex(-1);
-
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-
-    debounceRef.current = setTimeout(() => performSearch(e.target.value), 300);
-  }, []);
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value);
+      setFocusedIndex(-1);
+      performSearch(e.target.value);
+    },
+    [performSearch],
+  );
 
   const handleItemClick = (item: string) => {
     alert(`Selected item: ${item}`);
@@ -90,15 +87,6 @@ export default function HomeInputSearch() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  useEffect(() => {
-    return () => {
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
-    };
-  }, []);
-
   return (
     <InputSearch
       ref={inputRef}
