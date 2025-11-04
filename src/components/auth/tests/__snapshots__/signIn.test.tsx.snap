@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`SignIn Component should match snapshot 1`] = `
+<div>
+  <form>
+    <div
+      style="display: flex; align-items: center;"
+    >
+      <label
+        for="username"
+        style="font-size: 1.5rem; color: rgb(216, 216, 216); flex: 0 0 250px;"
+      >
+        Login
+      </label>
+      <div>
+        <div>
+          <input
+            aria-invalid="false"
+            name="username"
+            style="font-size: 1.1rem; width: 100%; padding: 1em 2.8em 1em 1.3em; color: rgb(216, 216, 216); border: 2px solid rgb(216, 216, 216); background-color: rgba(0, 0, 0, 0.301);"
+            type="text"
+            value=""
+          />
+          <img
+            alt="Login-icon"
+            src="test-file-stub"
+            style="position: absolute; top: 50%; right: 5%; height: 20px; width: 20px; transform: translateY(-50%);"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      style="display: flex; align-items: center;"
+    >
+      <label
+        for="password"
+        style="font-size: 1.5rem; color: rgb(216, 216, 216); flex: 0 0 250px;"
+      >
+        Password
+      </label>
+      <div>
+        <div>
+          <input
+            aria-invalid="false"
+            name="password"
+            style="font-size: 1.1rem; width: 100%; padding: 1em 2.8em 1em 1.3em; color: rgb(216, 216, 216); border: 2px solid rgb(216, 216, 216); background-color: rgba(0, 0, 0, 0.301);"
+            type="password"
+            value=""
+          />
+          <img
+            alt="Password-icon"
+            src="test-file-stub"
+            style="position: absolute; top: 50%; right: 5%; height: 20px; width: 20px; transform: translateY(-50%);"
+          />
+        </div>
+      </div>
+    </div>
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

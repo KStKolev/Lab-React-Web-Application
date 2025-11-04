@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Input Component should match snapshot 1`] = `
+<div>
+  <div>
+    <div>
+      <div>
+        <input
+          aria-invalid="false"
+          name="test"
+          placeholder="Enter text"
+          type="text"
+          value="test value"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Input Component should match snapshot with error 1`] = `
+<div>
+  <div>
+    <div>
+      <div>
+        <input
+          aria-describedby="test-error"
+          aria-invalid="true"
+          name="test"
+          placeholder="Enter text"
+          type="text"
+          value=""
+        />
+      </div>
+      <span>
+        Error message
+      </span>
+    </div>
+  </div>
+</div>
+`;
