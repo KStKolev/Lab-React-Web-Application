@@ -12,3 +12,19 @@
   border-radius: 0.5rem;
   object-fit: cover;
 }
+
+.profileButton {
+  width: 100%;
+  font-size: 1.1rem;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  background-color: rgba(96, 48, 128, 0.722);
+  padding: 0.8em 1em;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(120, 60, 160);
+  }
+}

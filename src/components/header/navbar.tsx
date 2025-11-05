@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "@/customHooks/useAuth";
 import useCart from "@/customHooks/useCart";
-import routes from "@/routes";
+import routes from "@/constants/routes";
+import authModalStyles from "@/constants/navbarStyles";
 import userIcon from "@/assets/images/icons/user.png";
 import arrowDropDown from "@/assets/images/icons/arrowDrop.svg";
 import shoppingCartIcon from "@/assets/images/icons/shoppingCart.png";
@@ -18,9 +19,10 @@ export default function Navbar() {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [pendingNav, setPendingNav] = useState<string | null>(null);
-  const { cartCount } = useCart();
   const { user, signIn, signUp, logout } = useAuth();
+  const { cartCount } = useCart();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const getNavLinkClass = (isActive: boolean) => `${style.navItem} ${isActive ? style.active : ""}`;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -48,9 +50,10 @@ export default function Navbar() {
   return (
     <nav>
       <ul className={style.navList}>
-        <NavLink to={routes.HOME} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
+        <NavLink to={routes.HOME} className={({ isActive }) => getNavLinkClass(isActive)}>
           Home
         </NavLink>
+
         <div className={style.dropdownWrapper} ref={dropdownRef}>
           <button type="button" className={`${style.dropdown} ${style.navItem}`} aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
             <span>Products</span>
@@ -61,7 +64,7 @@ export default function Navbar() {
             <div className={style.dropdownContent}>
               <NavLink
                 to={routes.PC}
-                className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
+                className={({ isActive }) => getNavLinkClass(isActive)}
                 onClick={(e) => handleProtectedNav(e, routes.PC)}
               >
                 PC
@@ -69,7 +72,7 @@ export default function Navbar() {
 
               <NavLink
                 to={routes.PS}
-                className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
+                className={({ isActive }) => getNavLinkClass(isActive)}
                 onClick={(e) => handleProtectedNav(e, routes.PS)}
               >
                 Playstation 5
@@ -77,7 +80,7 @@ export default function Navbar() {
 
               <NavLink
                 to={routes.XBOX}
-                className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
+                className={({ isActive }) => getNavLinkClass(isActive)}
                 onClick={(e) => handleProtectedNav(e, routes.XBOX)}
               >
                 XBox One
@@ -88,7 +91,7 @@ export default function Navbar() {
 
         <NavLink
           to={routes.ABOUT}
-          className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}
+          className={({ isActive }) => getNavLinkClass(isActive)}
           onClick={(e) => handleProtectedNav(e, routes.ABOUT)}
         >
           About
@@ -96,12 +99,12 @@ export default function Navbar() {
 
         {user ? (
           <>
-            <NavLink to={routes.PROFILE} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
+            <NavLink to={routes.PROFILE} className={({ isActive }) => getNavLinkClass(isActive)}>
               <img src={userIcon} className={style.userIcon} alt="User Icon" />
               {user.username}
             </NavLink>
 
-            <NavLink to={routes.CART} className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ""}`}>
+            <NavLink to={routes.CART} className={({ isActive }) => getNavLinkClass(isActive)}>
               <img src={shoppingCartIcon} className={style.cartIcon} alt="Cart Icon" />
               <span className={style.cartItemCount}>{cartCount}</span>
             </NavLink>
@@ -119,6 +122,7 @@ export default function Navbar() {
                 Sign In
               </button>
             </li>
+
             <li className={style.navButtonItem}>
               <button type="button" className={style.navButton} onClick={() => setShowSignUp(true)}>
                 Sign Up
@@ -129,17 +133,7 @@ export default function Navbar() {
       </ul>
 
       {showSignIn && (
-        <Modal
-          onClose={() => setShowSignIn(false)}
-          modalTitle="Authorization"
-          customStyles={{
-            overlay: {
-              backgroundColor: "rgb(76, 76, 76)",
-            },
-            wrapper: { width: "50%" },
-            title: { fontSize: "1.8rem" },
-          }}
-        >
+        <Modal onClose={() => setShowSignIn(false)} modalTitle="Authorization" customStyles={authModalStyles}>
           <SignIn
             signIn={signIn}
             onSignInSuccess={() => {
@@ -154,17 +148,7 @@ export default function Navbar() {
       )}
 
       {showSignUp && (
-        <Modal
-          onClose={() => setShowSignUp(false)}
-          modalTitle="Registration"
-          customStyles={{
-            overlay: {
-              backgroundColor: "rgb(76, 76, 76)",
-            },
-            wrapper: { width: "50%" },
-            title: { fontSize: "1.8rem" },
-          }}
-        >
+        <Modal onClose={() => setShowSignUp(false)} modalTitle="Registration" customStyles={authModalStyles}>
           <SignUp
             signUp={signUp}
             onSignUpSuccess={() => {

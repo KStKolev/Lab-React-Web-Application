@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import { AUTH_USER } from "@/constants/localStorage";
+import { authUser } from "@/constants/localStorage";
 
 interface AuthState {
   user?: {
@@ -13,7 +13,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  user: JSON.parse(localStorage.getItem(AUTH_USER) || "null"),
+  user: JSON.parse(localStorage.getItem(authUser) || "null"),
 };
 
 const authSlice = createSlice({

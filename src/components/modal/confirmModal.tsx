@@ -20,10 +20,12 @@ export default function ConfirmModal(props: ConfirmModalProps) {
     >
       <div className={styles.confirmModalContent}>
         <p className={styles.confirmMessage}>Are you sure you want to delete the product {props.productName}?</p>
+
         <div className={styles.buttonContainer}>
           <button type="button" className={styles.button} onClick={props.onConfirm}>
             Yes
           </button>
+
           <button type="button" className={styles.button} onClick={props.onCancel}>
             No
           </button>

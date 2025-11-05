@@ -1,7 +1,6 @@
 import { memo } from "react";
 import defaultProfilePicture from "@/assets/images/noPhoto.jpg";
-import * as profileImageStyles from "./profilePicture.m.scss";
-import * as profileStyles from "./profile.m.scss";
+import * as styles from "./profilePicture.m.scss";
 
 interface ProfilePictureProps {
   profilePicture: string;
@@ -21,17 +20,19 @@ function ProfilePicture(props: ProfilePictureProps) {
   };
 
   return (
-    <div className={profileImageStyles.profileImageContainer}>
-      <img src={props.profilePicture || defaultProfilePicture} className={profileImageStyles.profileImage} alt="Profile" />
+    <div className={styles.profileImageContainer}>
+      <img src={props.profilePicture || defaultProfilePicture} className={styles.profileImage} alt="Profile" />
+
       <button
         type="button"
-        className={profileStyles.profileButton}
+        className={styles.profileButton}
         onClick={() => {
           document.getElementById("profileImageInput")?.click();
         }}
       >
         Change profile image
       </button>
+
       <input type="file" accept="image/*" id="profileImageInput" style={{ display: "none" }} onChange={handleImageChange} />
     </div>
   );

@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import apiEndpoints from "@/api.endpoints";
+import { useState } from "react";
 import useAuth from "@/customHooks/useAuth";
+import useProfileForm from "@/customHooks/useProfileForm";
+import useProfileValidation from "@/customHooks/useProfileValidation";
 import backgroundImage from "@/assets/images/background.jpg";
 import ProfileForm from "./profileForm";
 import ProfilePicture from "./profilePicture";
@@ -8,70 +9,21 @@ import Modal from "../modal/modal";
 import ChangePassword from "../auth/changePassword";
 import * as styles from "./profile.m.scss";
 
-interface ProfileErrors {
-  username?: string;
-  profileDescription?: string;
-}
-
 export default function Profile() {
-  const [username, setUsername] = useState("");
-  const [profileDescription, setProfileDescription] = useState("");
-  const [profilePicture, setProfilePicture] = useState("");
-  const [changePassword, setChangePassword] = useState(false);
-  const [errors, setErrors] = useState<ProfileErrors>({});
   const { user, updateUser } = useAuth();
-
-  const getProfile = async (name: string) => {
-    const res = await fetch(`${apiEndpoints.getProfile}/${encodeURIComponent(name)}`);
-    const response = await res.json();
-
-    if (response.code === 200) {
-      setUsername(response.user.username);
-      setProfileDescription(response.user.profileDescription);
-      setProfilePicture(response.user.profilePicture);
-    }
-  };
-
-  useEffect(() => {
-    if (user?.username) {
-      getProfile(user.username);
-    }
-  }, [user]);
-
-  const validateInputs = () => {
-    const newErrors: ProfileErrors = {};
-
-    if (!username.trim()) {
-      newErrors.username = "Username is required";
-    }
-
-    if (!profileDescription.trim()) {
-      newErrors.profileDescription = "Profile description is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const { username, profileDescription, profilePicture, setUsername, setProfileDescription, setProfilePicture, saveProfile } =
+    useProfileForm(user);
+  const { errors, validateInputs } = useProfileValidation();
+  const [changePassword, setChangePassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateInputs()) {
+    if (!validateInputs(username, profileDescription)) {
       return;
     }
 
-    const response = await fetch(apiEndpoints.saveProfile, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user,
-        username,
-        profileDescription,
-        profilePicture,
-      }),
-    }).then((res) => res.json());
+    const response = await saveProfile(user);
 
     if (response.code === 200) {
       updateUser(response.updatedUser);
@@ -83,6 +35,7 @@ export default function Profile() {
       <section className={styles.profileSection}>
         <h1 className={styles.profileTitle}>{user?.username} profile page</h1>
         <hr />
+
         <div className={styles.profileContent}>
           <ProfilePicture profilePicture={profilePicture} onChange={setProfilePicture} />
 
@@ -98,6 +51,7 @@ export default function Profile() {
             <button type="button" className={styles.profileButton} onClick={handleSubmit}>
               Save profile
             </button>
+
             <button type="button" className={styles.profileButton} onClick={() => setChangePassword(!changePassword)}>
               Change password
             </button>

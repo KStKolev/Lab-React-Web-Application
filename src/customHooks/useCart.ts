@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, updateAmount, updateProductInCart, removeSelectedItems } from "@/store/cartSlice";
-import { RootState } from "@/store/store";
+import type { TypedUseSelectorHook } from "react-redux";
+import { addToCart, updateAmount, updateProductInCart, removeSelectedItems } from "@/redux/cartSlice";
+import { RootState, AppDispatch } from "@/redux/store";
+
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default function useCart() {
-  const cartCount = useSelector((state: RootState) => state.cart.length);
-  const cartItems = useSelector((state: RootState) => state.cart);
+  const cartCount = useAppSelector((state) => state.cart.length);
+  const cartItems = useAppSelector((state) => state.cart);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const handleAddToCart = (product: object) => dispatch(addToCart(product));
   const handleUpdateAmount = (product: object) => dispatch(updateAmount(product));
   const handleUpdateProductInCart = (product: object) => dispatch(updateProductInCart(product));

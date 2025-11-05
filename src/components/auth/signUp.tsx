@@ -1,19 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isStrongPassword } from "@/utils/validationUtils";
+import { signUpInputStyles } from "@/constants/authInputStyles";
+import { useSignUpValidation } from "@/customHooks/useAuthValidation";
 import Input from "@/elements/input";
-import routes from "@/routes";
+import routes from "@/constants/routes";
 import apiEndpoints from "@/api.endpoints";
 import padlockIcon from "@/assets/images/icons/padlock.svg";
 import idCardIcon from "@/assets/images/icons/idCard.svg";
 import * as styles from "./auth.m.scss";
-
-interface SignUpErrors {
-  username?: string;
-  password?: string;
-  confirmPassword?: string;
-  submitError?: string;
-}
 
 interface SignUpProps {
   onSignUpSuccess: () => void;
@@ -24,7 +18,7 @@ export default function SignUp(props: SignUpProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState<SignUpErrors>({});
+  const { errors, validateInputs, setErrors } = useSignUpValidation();
   const navigate = useNavigate();
 
   const resetForm = () => {
@@ -34,31 +28,10 @@ export default function SignUp(props: SignUpProps) {
     setErrors({});
   };
 
-  const validateInputs = () => {
-    const newErrors: SignUpErrors = {};
-
-    if (!username.trim()) {
-      newErrors.username = "Username is required.";
-    }
-
-    if (!password) {
-      newErrors.password = "Password is required.";
-    } else if (!isStrongPassword(password)) {
-      newErrors.password = "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.";
-    }
-
-    if (password !== confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateInputs()) {
+    if (!validateInputs(username, password, confirmPassword)) {
       return;
     }
 
@@ -90,27 +63,9 @@ export default function SignUp(props: SignUpProps) {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         error={errors.username}
-        customStyles={{
-          wrapper: { display: "flex", alignItems: "center" },
-          label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
-          inputField: {
-            fontSize: "1.1rem",
-            width: "100%",
-            color: "rgb(216, 216, 216)",
-            border: "2px solid rgb(216, 216, 216)",
-            backgroundColor: "rgba(0, 0, 0, 0.301)",
-            padding: "1em 2.8em 1em 1.3em",
-          },
-          icon: {
-            position: "absolute",
-            top: "50%",
-            right: "5%",
-            height: "20px",
-            width: "20px",
-            transform: "translateY(-50%)",
-          },
-        }}
+        customStyles={signUpInputStyles}
       />
+
       <Input
         label="Password"
         name="password"
@@ -119,27 +74,9 @@ export default function SignUp(props: SignUpProps) {
         iconUrl={padlockIcon}
         onChange={(e) => setPassword(e.target.value)}
         error={errors.password}
-        customStyles={{
-          wrapper: { display: "flex", alignItems: "center" },
-          label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
-          inputField: {
-            fontSize: "1.1rem",
-            width: "100%",
-            color: "rgb(216, 216, 216)",
-            border: "2px solid rgb(216, 216, 216)",
-            backgroundColor: "rgba(0, 0, 0, 0.301)",
-            padding: "1em 2.8em 1em 1.3em",
-          },
-          icon: {
-            position: "absolute",
-            top: "50%",
-            right: "5%",
-            height: "20px",
-            width: "20px",
-            transform: "translateY(-50%)",
-          },
-        }}
+        customStyles={signUpInputStyles}
       />
+
       <Input
         label="Repeat Password"
         name="confirmPassword"
@@ -148,28 +85,11 @@ export default function SignUp(props: SignUpProps) {
         iconUrl={padlockIcon}
         onChange={(e) => setConfirmPassword(e.target.value)}
         error={errors.confirmPassword}
-        customStyles={{
-          wrapper: { display: "flex", alignItems: "center" },
-          label: { flex: "0 0 300px", fontSize: "1.5rem", color: "rgb(216, 216, 216)" },
-          inputField: {
-            fontSize: "1.1rem",
-            width: "100%",
-            color: "rgb(216, 216, 216)",
-            border: "2px solid rgb(216, 216, 216)",
-            backgroundColor: "rgba(0, 0, 0, 0.301)",
-            padding: "1em 2.8em 1em 1.3em",
-          },
-          icon: {
-            position: "absolute",
-            top: "50%",
-            right: "5%",
-            height: "20px",
-            width: "20px",
-            transform: "translateY(-50%)",
-          },
-        }}
+        customStyles={signUpInputStyles}
       />
+
       {errors.submitError && <span className={styles.errorMessage}>{errors.submitError}</span>}
+
       <button className={styles.submitButton} type="submit">
         Submit
       </button>
